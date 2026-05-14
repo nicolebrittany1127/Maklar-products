@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy & Terms of Service — Maklar Products</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue-50:  #E6F1FB;
+    --blue-100: #B5D4F4;
+    --blue-200: #85B7EB;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --blue-900: #042C53;
+    --white:    #ffffff;
+    --gray-50:  #F7F9FC;
+    --gray-100: #EEF2F7;
+    --gray-200: #D8E2EE;
+    --gray-400: #8A9AB5;
+    --gray-700: #3D4F6B;
+    --gray-900: #0F1C2E;
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body:    'DM Sans', sans-serif;
+    --radius: 12px;
+    --radius-pill: 999px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--gray-900);
+    background: var(--white);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: var(--font-body);
+    font-weight: 700; font-size: 1.5rem;
+    color: var(--blue-900); text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--blue-400); }
+
+  .nav-back {
+    font-size: 0.875rem; color: var(--gray-700);
+    text-decoration: none; display: flex; align-items: center; gap: 0.4rem;
+    transition: color 0.2s;
+  }
+
+  .nav-back:hover { color: var(--blue-600); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, var(--blue-900) 0%, var(--blue-800) 60%, var(--blue-600) 100%);
+    color: var(--white);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 400; line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    font-size: 1rem; color: rgba(255,255,255,0.7);
+    max-width: 520px; margin: 0 auto;
+    font-weight: 300; line-height: 1.7;
+  }
+
+  .hero-meta {
+    display: flex; gap: 2rem; justify-content: center;
+    margin-top: 1.5rem; flex-wrap: wrap;
+  }
+
+  .hero-meta span {
+    font-size: 0.8rem; color: rgba(255,255,255,0.5);
+    font-weight: 400; letter-spacing: 0.04em;
+  }
+
+  /* TOC */
+  .toc-wrap {
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 1.5rem 2rem;
+  }
+
+  .toc {
+    max-width: 860px; margin: 0 auto;
+    display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
+  }
+
+  .toc-label {
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--gray-400); margin-right: 0.5rem;
+  }
+
+  .toc a {
+    font-size: 0.82rem; color: var(--blue-600);
+    text-decoration: none; font-weight: 500;
+    padding: 0.3rem 0.75rem;
+    background: var(--blue-50);
+    border-radius: var(--radius-pill);
+    transition: background 0.2s;
+  }
+
+  .toc a:hover { background: var(--blue-100); }
+
+  /* MAIN CONTENT */
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  /* SECTION DIVIDER */
+  .doc-section {
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 2px solid var(--gray-100);
+  }
+
+  .doc-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .doc-section-label {
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--blue-400); margin-bottom: 0.75rem;
+  }
+
+  .doc-section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 400; line-height: 1.2;
+    color: var(--blue-900); margin-bottom: 0.5rem;
+  }
+
+  .doc-section-date {
+    font-size: 0.82rem; color: var(--gray-400);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ARTICLE CONTENT */
+  h2 {
+    font-size: 1.15rem; font-weight: 600;
+    color: var(--gray-900);
+    margin-top: 2.5rem; margin-bottom: 0.75rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--gray-100);
+  }
+
+  h2:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  p {
+    font-size: 0.95rem; color: var(--gray-700);
+    line-height: 1.8; font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  ul, ol {
+    margin: 0.75rem 0 1rem 1.5rem;
+  }
+
+  li {
+    font-size: 0.95rem; color: var(--gray-700);
+    line-height: 1.8; font-weight: 300;
+    margin-bottom: 0.35rem;
+  }
+
+  strong { font-weight: 600; color: var(--gray-900); }
+
+  a { color: var(--blue-600); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: var(--blue-50);
+    border: 1px solid var(--blue-100);
+    border-left: 4px solid var(--blue-400);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .highlight-box p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: var(--blue-800);
+  }
+
+  .highlight-box strong { color: var(--blue-900); }
+
+  /* CONTACT BOX */
+  .contact-box {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .contact-box p { margin-bottom: 0.25rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--gray-900);
+    color: rgba(255,255,255,0.5);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  footer strong { color: var(--white); font-weight: 600; }
+
+  footer a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    margin: 0 0.75rem; transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--white); }
+
+  .footer-links { margin-top: 0.75rem; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    .content { padding: 2.5rem 1.25rem 4rem; }
+    .toc-wrap { padding: 1rem 1.25rem; }
+    .hero { padding: 3.5rem 1.25rem 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Maklar <span>Products</span></a>
+  <a class="nav-back" href="index.html">← Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Privacy Policy &<br />Terms of Service</h1>
+  <p>Please read these documents carefully. They govern your use of Maklar Products and our software platforms.</p>
+  <div class="hero-meta">
+    <span>Effective Date: January 1, 2025</span>
+    <span>Last Updated: May 2025</span>
+    <span>Maklar Products LLC</span>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc-wrap">
+  <div class="toc">
+    <span class="toc-label">Jump to</span>
+    <a href="#privacy">Privacy Policy</a>
+    <a href="#privacy-data">Data We Collect</a>
+    <a href="#privacy-use">How We Use Data</a>
+    <a href="#privacy-hipaa">HIPAA</a>
+    <a href="#terms">Terms of Service</a>
+    <a href="#terms-use">Acceptable Use</a>
+    <a href="#terms-liability">Liability</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- PRIVACY POLICY -->
+  <div class="doc-section" id="privacy">
+    <p class="doc-section-label">Document 1 of 2</p>
+    <h1 class="doc-section-title">Privacy Policy</h1>
+    <p class="doc-section-date">Effective January 1, 2025 · Last updated May 2025</p>
+
+    <div class="highlight-box">
+      <p><strong>Summary:</strong> Maklar Products collects only the information necessary to provide our services. We do not sell your data. We are committed to protecting the privacy of all users, including healthcare professionals and organizations.</p>
+    </div>
+
+    <h2>1. Who We Are</h2>
+    <p>Maklar Products LLC ("Maklar," "we," "us," or "our") is a healthcare technology company based in the United States. We operate the following software platforms: <strong>Creddi</strong> (credentialing management), <strong>TrendDX</strong> (RCM KPI dashboard), and <strong>AuthAlly</strong> (prior authorization intelligence). This Privacy Policy explains how we collect, use, disclose, and protect information when you use our websites and platforms.</p>
+
+    <h2 id="privacy-data">2. Information We Collect</h2>
+    <p>We collect information in the following ways:</p>
+    <ul>
+      <li><strong>Account Information:</strong> Name, email address, organization name, job title, and password when you create an account.</li>
+      <li><strong>Usage Data:</strong> Pages visited, features used, time spent, and actions taken within our platforms.</li>
+      <li><strong>Device & Technical Data:</strong> IP address, browser type, operating system, and device identifiers.</li>
+      <li><strong>Communications:</strong> Messages you send us via email, contact forms, or in-app support.</li>
+      <li><strong>Customer-Provided Data:</strong> Information you or your organization enters into our platforms, including provider data, clinical documentation, and billing records.</li>
+    </ul>
+
+    <h2>3. Provider & Credentialing Data (Creddi)</h2>
+    <p>Creddi processes provider licensing information, credentials, and payer network status. This data relates to healthcare providers, not patients, and does not constitute Protected Health Information (PHI) under HIPAA. We treat this data with strict confidentiality and use it only to provide the Creddi service.</p>
+
+    <h2 id="privacy-use">4. How We Use Your Information</h2>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Provide, maintain, and improve our software platforms</li>
+      <li>Create and manage your account</li>
+      <li>Send product updates, security alerts, and support communications</li>
+      <li>Analyze usage patterns to improve user experience</li>
+      <li>Comply with legal obligations</li>
+      <li>Respond to inquiries and provide customer support</li>
+    </ul>
+    <p>We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+
+    <h2 id="privacy-hipaa">5. HIPAA & Protected Health Information</h2>
+    <p>Certain Maklar Products platforms (including TrendDX and AuthAlly) may process Protected Health Information (PHI) as defined under the Health Insurance Portability and Accountability Act (HIPAA). When our platforms are used to process PHI:</p>
+    <ul>
+      <li>We operate as a Business Associate under HIPAA and will execute a Business Associate Agreement (BAA) with covered entities prior to processing any PHI.</li>
+      <li>We implement appropriate administrative, physical, and technical safeguards to protect PHI.</li>
+      <li>We do not use or disclose PHI except as permitted by HIPAA and the applicable BAA.</li>
+      <li>In the event of a breach involving PHI, we will notify affected parties as required by the HIPAA Breach Notification Rule.</li>
+    </ul>
+    <p>If your use of our platforms involves PHI, please contact us at <a href="mailto:privacy@maklarproducts.com">privacy@maklarproducts.com</a> to execute a BAA before proceeding.</p>
+
+    <h2>6. Data Sharing & Third Parties</h2>
+    <p>We may share your information with trusted third-party service providers who assist us in operating our platforms, including cloud hosting providers, analytics services, and customer support tools. All third-party providers are required to maintain the confidentiality of your information and are prohibited from using it for their own purposes.</p>
+    <p>We may also disclose your information if required to do so by law, or in response to valid legal process such as a subpoena or court order.</p>
+
+    <h2>7. Data Retention</h2>
+    <p>We retain your information for as long as your account is active or as needed to provide you services. If you wish to delete your account or request that we no longer use your information, please contact us at <a href="mailto:privacy@maklarproducts.com">privacy@maklarproducts.com</a>. We will respond within 30 days.</p>
+
+    <h2>8. Data Security</h2>
+    <p>We implement industry-standard security measures to protect your information, including encryption in transit (TLS), encryption at rest, access controls, and regular security assessments. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+
+    <h2>9. Your Rights</h2>
+    <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+    <ul>
+      <li>The right to access the personal information we hold about you</li>
+      <li>The right to correct inaccurate information</li>
+      <li>The right to request deletion of your information</li>
+      <li>The right to object to or restrict processing of your information</li>
+      <li>The right to data portability</li>
+    </ul>
+    <p>To exercise any of these rights, please contact us at <a href="mailto:privacy@maklarproducts.com">privacy@maklarproducts.com</a>.</p>
+
+    <h2>10. Cookies</h2>
+    <p>We use cookies and similar tracking technologies to improve your experience on our platforms. You can control cookies through your browser settings. Disabling cookies may affect the functionality of certain features.</p>
+
+    <h2>11. Children's Privacy</h2>
+    <p>Our platforms are not directed at children under the age of 13. We do not knowingly collect personal information from children. If you believe we have inadvertently collected such information, please contact us immediately.</p>
+
+    <h2>12. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by email or by posting a notice on our platforms. Your continued use of our services after changes take effect constitutes your acceptance of the revised policy.</p>
+  </div>
+
+  <!-- TERMS OF SERVICE -->
+  <div class="doc-section" id="terms">
+    <p class="doc-section-label">Document 2 of 2</p>
+    <h1 class="doc-section-title">Terms of Service</h1>
+    <p class="doc-section-date">Effective January 1, 2025 · Last updated May 2025</p>
+
+    <div class="highlight-box">
+      <p><strong>Summary:</strong> By using Maklar Products platforms, you agree to use them lawfully and responsibly. Our platforms are provided for professional healthcare use. You are responsible for ensuring your use complies with applicable laws, including HIPAA.</p>
+    </div>
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing or using any Maklar Products platform — including Creddi, TrendDX, and AuthAlly — you agree to be bound by these Terms of Service ("Terms"). If you are using our platforms on behalf of an organization, you represent that you have the authority to bind that organization to these Terms.</p>
+    <p>If you do not agree to these Terms, do not use our platforms.</p>
+
+    <h2>2. Description of Services</h2>
+    <p>Maklar Products provides the following software-as-a-service (SaaS) platforms:</p>
+    <ul>
+      <li><strong>Creddi:</strong> A credentialing management platform for tracking provider licensing, credentials, and payer network status.</li>
+      <li><strong>TrendDX:</strong> A customizable revenue cycle management (RCM) KPI dashboard for tracking billing performance metrics across provider types and specialties.</li>
+      <li><strong>AuthAlly:</strong> An AI-powered prior authorization review platform for behavioral health utilization review.</li>
+    </ul>
+
+    <h2 id="terms-use">3. Acceptable Use</h2>
+    <p>You agree to use our platforms only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+    <ul>
+      <li>Use our platforms in any way that violates applicable federal, state, or local law or regulation</li>
+      <li>Upload or transmit any PHI without first executing a BAA with Maklar Products</li>
+      <li>Attempt to gain unauthorized access to any part of our platforms or systems</li>
+      <li>Use our platforms to store, transmit, or distribute malicious code</li>
+      <li>Reverse engineer, decompile, or disassemble any part of our platforms</li>
+      <li>Share your account credentials with unauthorized individuals</li>
+      <li>Use our platforms to engage in any fraudulent, deceptive, or harmful activity</li>
+    </ul>
+
+    <h2>4. Accounts & Registration</h2>
+    <p>To use our platforms, you must create an account. You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account. You agree to notify us immediately of any unauthorized use of your account at <a href="mailto:security@maklarproducts.com">security@maklarproducts.com</a>.</p>
+
+    <h2>5. HIPAA Compliance Obligations</h2>
+    <p>If your use of our platforms involves the creation, receipt, maintenance, or transmission of PHI, you are required to execute a Business Associate Agreement (BAA) with Maklar Products before using the applicable platform. You are solely responsible for ensuring your use of our platforms complies with HIPAA and all other applicable healthcare privacy laws. Maklar Products is not responsible for your organization's HIPAA compliance program.</p>
+
+    <h2>6. Intellectual Property</h2>
+    <p>All content, features, and functionality of our platforms — including but not limited to software, text, graphics, logos, and designs — are owned by Maklar Products LLC and are protected by U.S. and international intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written permission.</p>
+
+    <h2>7. Your Data</h2>
+    <p>You retain ownership of all data you submit to our platforms. By submitting data, you grant Maklar Products a limited license to use that data solely to provide and improve the services you have subscribed to. We will not access your data except as necessary to provide support or as required by law.</p>
+
+    <h2>8. Subscriptions & Payment</h2>
+    <p>Access to our platforms is provided on a subscription basis. Subscription fees are billed in advance on a monthly or annual basis. All fees are non-refundable except as required by law or as otherwise specified in your subscription agreement. We reserve the right to modify pricing with 30 days' notice.</p>
+
+    <h2 id="terms-liability">9. Disclaimer of Warranties</h2>
+    <p>Our platforms are provided "as is" and "as available" without warranties of any kind, either express or implied. Maklar Products does not warrant that our platforms will be uninterrupted, error-free, or free of viruses or other harmful components. We do not warrant that the results obtained from using our platforms will be accurate or reliable.</p>
+    <p><strong>Important:</strong> AuthAlly's AI-powered analysis is intended to assist utilization review professionals and does not constitute clinical advice, legal advice, or a guarantee of prior authorization approval. All authorization decisions remain the responsibility of the qualified professional using the platform.</p>
+
+    <h2>10. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, Maklar Products LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of our platforms, even if we have been advised of the possibility of such damages. Our total liability to you for any claim arising out of or related to these Terms or our platforms shall not exceed the amount you paid to us in the twelve months preceding the claim.</p>
+
+    <h2>11. Indemnification</h2>
+    <p>You agree to indemnify and hold harmless Maklar Products LLC and its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses arising out of or related to your use of our platforms, your violation of these Terms, or your violation of any applicable law or third-party rights.</p>
+
+    <h2>12. Termination</h2>
+    <p>We reserve the right to suspend or terminate your access to our platforms at any time, with or without cause, with or without notice. Upon termination, your right to use our platforms will immediately cease. You may terminate your account at any time by contacting us at <a href="mailto:hello@maklarproducts.com">hello@maklarproducts.com</a>.</p>
+
+    <h2>13. Governing Law</h2>
+    <p>These Terms shall be governed by and construed in accordance with the laws of the State of Florida, without regard to its conflict of law provisions. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts located in Florida.</p>
+
+    <h2>14. Changes to These Terms</h2>
+    <p>We may update these Terms from time to time. We will notify you of significant changes by email or by posting a notice on our platforms. Your continued use of our services after changes take effect constitutes your acceptance of the revised Terms.</p>
+
+    <div class="contact-box" id="contact">
+      <p class="doc-section-label" style="margin-bottom:0.5rem">Contact Us</p>
+      <p>If you have any questions about this Privacy Policy or these Terms of Service, please contact us:</p>
+      <p><strong>Maklar Products LLC</strong></p>
+      <p>Email: <a href="mailto:privacy@maklarproducts.com">privacy@maklarproducts.com</a></p>
+      <p>Website: <a href="https://maklarproducts.com">maklarproducts.com</a></p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Maklar Products</strong> — Healthcare Technology Solutions</p>
+  <p style="margin-top:0.35rem;">© 2025 Maklar Products LLC. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="creddi-landing.html">Creddi</a>
+    <a href="trenddx-landing.html">TrendDX</a>
+    <a href="authally_landing.html">AuthAlly</a>
+    <a href="mailto:hello@maklarproducts.com">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
