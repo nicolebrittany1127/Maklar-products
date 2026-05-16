@@ -463,42 +463,51 @@
 
     if (!valid) return;
 
-    // Build mailto
     const phone         = document.getElementById('phone').value.trim();
     const providerCount = document.getElementById('providerCount').value;
     const notes         = document.getElementById('notes').value.trim();
 
-    const subject = encodeURIComponent(`Demo Request — ${selectedProduct} — ${org}`);
-    const body = encodeURIComponent(
-`New Demo Request — Maklár Products
+    // Disable button to prevent double submit
+    const btn = document.querySelector('.submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
 
-Product Interest: ${selectedProduct}
+    // Submit to Formspree
+    const formData = {
+      product:       selectedProduct,
+      name:          `${firstName} ${lastName}`,
+      email:         email,
+      phone:         phone || 'Not provided',
+      organization:  org,
+      org_type:      orgType,
+      providers:     providerCount || 'Not specified',
+      notes:         notes || 'None provided',
+      _subject:      `Demo Request — ${selectedProduct} — ${org}`
+    };
 
-Name: ${firstName} ${lastName}
-Email: ${email}
-Phone: ${phone || 'Not provided'}
-Organization: ${org}
-Organization Type: ${orgType}
-Number of Providers: ${providerCount || 'Not specified'}
-
-Notes / Topics to Cover:
-${notes || 'None provided'}
-
----
-Submitted via maklarproducts.com demo request form`
-    );
-
-    // Open mailto
-    window.location.href = `mailto:sales@maklarproducts.com?subject=${subject}&body=${body}`;
-
-    // Show success screen after short delay
-    setTimeout(() => {
-      document.getElementById('form-section').style.display = 'none';
-      document.querySelector('.product-grid').style.display = 'none';
-      document.querySelector('.product-label').style.display = 'none';
-      document.getElementById('product-error').style.display = 'none';
-      document.getElementById('success-screen').style.display = 'block';
-    }, 800);
+    fetch('https://formspree.io/f/mkoydlwn', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (response.ok) {
+        document.getElementById('form-section').style.display = 'none';
+        document.querySelector('.product-grid').style.display = 'none';
+        document.querySelector('.product-label').style.display = 'none';
+        document.getElementById('product-error').style.display = 'none';
+        document.getElementById('success-screen').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Request Your Demo →';
+        alert('Something went wrong. Please try again or email us directly at sales@maklarproducts.com');
+      }
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.textContent = 'Request Your Demo →';
+      alert('Something went wrong. Please try again or email us directly at sales@maklarproducts.com');
+    });
   }
 </script>
 
