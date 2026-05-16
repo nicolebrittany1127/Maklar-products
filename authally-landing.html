@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AuthAlly — Prior Authorization Intelligence for Behavioral Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue-50:   #E6F1FB;
+    --blue-100:  #B5D4F4;
+    --blue-200:  #85B7EB;
+    --blue-400:  #378ADD;
+    --blue-600:  #185FA5;
+    --blue-800:  #0C447C;
+    --blue-900:  #042C53;
+    --white:     #ffffff;
+    --gray-50:   #F7F9FC;
+    --gray-100:  #EEF2F7;
+    --gray-200:  #D8E2EE;
+    --gray-400:  #8A9AB5;
+    --gray-700:  #3D4F6B;
+    --gray-900:  #0F1C2E;
+    --green:     #10B981;
+    --red:       #E24B4A;
+    --amber:     #F59E0B;
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body:    'DM Sans', sans-serif;
+    --radius:        12px;
+    --radius-sm:     8px;
+    --radius-pill:   999px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--gray-900); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-200); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .nav-logo { font-family: var(--font-body); font-weight: 600; font-size: 1.4rem; color: var(--blue-800); letter-spacing: -0.02em; text-decoration: none; }
+  .nav-logo span { color: var(--blue-400); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; font-size: 0.9rem; font-weight: 400; color: var(--gray-700); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--blue-600); }
+  .nav-cta { background: var(--blue-600); color: var(--white) !important; padding: 0.5rem 1.25rem; border-radius: var(--radius-pill); font-weight: 500 !important; font-size: 0.875rem !important; transition: background 0.2s !important; text-decoration: none; }
+  .nav-cta:hover { background: var(--blue-800) !important; }
+
+  /* HERO */
+  .hero { background: linear-gradient(160deg, var(--blue-900) 0%, var(--blue-800) 50%, var(--blue-600) 100%); color: var(--white); padding: 7rem 2rem 6rem; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(55,138,221,0.35) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: 5rem; align-items: center; position: relative; }
+  .hero-badge { display: inline-flex; align-items: center; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: var(--blue-100); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: var(--radius-pill); margin-bottom: 1.75rem; }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .hero h1 em { font-style: italic; color: var(--blue-200); }
+  .hero p { font-size: 1.1rem; color: rgba(255,255,255,0.75); margin-bottom: 2.5rem; font-weight: 300; line-height: 1.7; max-width: 480px; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .btn-primary { background: var(--white); color: var(--blue-800); padding: 0.85rem 2rem; border-radius: var(--radius-pill); font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: inline-block; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+  .btn-ghost { background: transparent; color: var(--white); padding: 0.85rem 2rem; border-radius: var(--radius-pill); font-weight: 400; font-size: 0.95rem; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: background 0.2s; display: inline-block; }
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+  .hero-trust { margin-top: 2rem; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); text-transform: uppercase; }
+
+  /* HERO CARD */
+  .hero-card { background: rgba(255,255,255,0.96); border-radius: var(--radius); padding: 1.5rem; color: var(--gray-900); box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+  .hero-card-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 1rem; }
+  .verdict-chip { display: inline-block; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 4px; background: #FEE2E2; color: #A32D2D; font-weight: 600; margin-bottom: 0.75rem; }
+  .score-display { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+  .score-ring { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 600; flex-shrink: 0; background: #FEE2E2; border: 3px solid var(--red); color: #A32D2D; }
+  .score-info h3 { font-size: 0.85rem; font-weight: 600; color: var(--gray-900); margin-bottom: 0.25rem; }
+  .score-info p { font-size: 0.75rem; color: var(--gray-700); line-height: 1.5; }
+  .dim-mini { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0; border-bottom: 1px solid var(--gray-100); font-size: 0.78rem; }
+  .dim-mini:last-of-type { border-bottom: none; }
+  .dim-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .dot-r { background: var(--red); } .dot-a { background: var(--amber); } .dot-g { background: var(--green); }
+  .dim-name { flex: 1; color: var(--gray-700); }
+  .dim-badge { font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 3px; font-weight: 600; }
+  .badge-gap { background: #FEE2E2; color: #A32D2D; } .badge-par { background: #FEF3C7; color: #92400E; } .badge-met { background: #D1FAE5; color: #065F46; }
+  .rem-box { background: var(--blue-50); border-radius: 6px; padding: 0.75rem 1rem; border-left: 3px solid var(--blue-400); margin-top: 0.75rem; }
+  .rem-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-600); margin-bottom: 0.3rem; }
+  .rem-text { font-size: 0.75rem; color: var(--gray-700); line-height: 1.6; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-600); margin-bottom: 0.75rem; }
+  .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: var(--gray-900); margin-bottom: 1rem; line-height: 1.15; letter-spacing: -0.01em; }
+  .section-subtitle { font-size: 1rem; color: var(--gray-700); line-height: 1.7; max-width: 560px; margin-bottom: 3.5rem; font-weight: 300; }
+
+  /* STATS */
+  .stats-bg { background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 100%); padding: 4rem 2rem; }
+  .stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 3rem; text-align: center; }
+  .stat-number { font-family: var(--font-display); font-size: 3.5rem; color: var(--white); line-height: 1; margin-bottom: 0.5rem; }
+  .stat-number span { color: var(--blue-200); font-size: 2rem; }
+  .stat-label { font-size: 0.875rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+  /* HOW IT WORKS */
+  .how-bg { background: var(--gray-50); border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); }
+  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .step-number { width: 48px; height: 48px; border-radius: 50%; background: var(--blue-50); border: 1px solid var(--blue-100); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 600; color: var(--blue-600); margin-bottom: 1rem; }
+  .step h3 { font-size: 1rem; font-weight: 600; color: var(--gray-900); margin-bottom: 0.5rem; }
+  .step p { font-size: 0.875rem; color: var(--gray-700); line-height: 1.7; }
+
+  /* PAYERS */
+  .payer-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.75rem; }
+  .payer-pill { font-size: 0.8rem; padding: 0.35rem 0.9rem; border-radius: var(--radius-pill); border: 1px solid var(--gray-200); background: var(--white); color: var(--gray-700); font-weight: 500; }
+  .payer-pill.fl { border-color: var(--blue-100); background: var(--blue-50); color: var(--blue-600); }
+
+  /* FEATURES */
+  .features-bg { background: var(--gray-50); border-top: 1px solid var(--gray-200); }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; }
+  .feature-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 1.75rem; transition: box-shadow 0.2s, transform 0.2s; }
+  .feature-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .feature-card h3 { font-size: 1rem; font-weight: 600; color: var(--gray-900); margin-bottom: 0.5rem; }
+  .feature-card p { font-size: 0.875rem; color: var(--gray-700); line-height: 1.7; }
+
+  /* ROI */
+  .roi-section { background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 100%); padding: 5rem 2rem; }
+  .roi-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 380px; gap: 5rem; align-items: start; }
+  .roi-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-200); margin-bottom: 0.75rem; }
+  .roi-title { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--white); margin-bottom: 1rem; line-height: 1.15; }
+  .roi-sub { font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 1.75rem; font-weight: 300; }
+  .roi-table { background: rgba(255,255,255,0.06); border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+  .roi-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.875rem; }
+  .roi-row:last-child { border-bottom: none; background: rgba(16,185,129,0.12); }
+  .roi-row .rl { color: rgba(255,255,255,0.55); }
+  .roi-row .rv { font-weight: 600; color: var(--white); }
+  .roi-row .rv.green { color: #6ee7b7; }
+  .roi-calc { margin-bottom: 1.25rem; }
+  .roi-calc label { font-size: 0.75rem; color: rgba(255,255,255,0.5); display: block; margin-bottom: 0.5rem; font-weight: 500; }
+  .roi-calc input[type=range] { width: 100%; accent-color: var(--blue-400); margin-bottom: 0.3rem; }
+  .slider-vals { display: flex; justify-content: space-between; font-size: 0.7rem; color: rgba(255,255,255,0.35); }
+  .slider-val-mid { color: rgba(255,255,255,0.8); font-weight: 600; }
+  .roi-result { text-align: center; background: rgba(255,255,255,0.06); border-radius: var(--radius); padding: 1.5rem; margin-top: 0.25rem; border: 1px solid rgba(255,255,255,0.1); }
+  .rr-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-bottom: 0.5rem; }
+  .rr-val { font-family: var(--font-display); font-size: 2.5rem; color: var(--blue-200); }
+  .rr-sub { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 0.25rem; }
+
+  /* TESTIMONIALS */
+  .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .testi-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 1.75rem; }
+  .testi-q { font-family: var(--font-display); font-size: 1rem; font-style: italic; color: var(--gray-900); line-height: 1.6; margin-bottom: 1rem; }
+  .testi-q::before { content: '\201C'; color: var(--blue-400); font-size: 1.5rem; line-height: 0; vertical-align: -0.3em; margin-right: 2px; }
+  .testi-person { font-size: 0.8rem; font-weight: 600; color: var(--gray-900); }
+  .testi-role { font-size: 0.78rem; color: var(--gray-400); margin-top: 0.2rem; }
+  .testi-badge { display: inline-block; font-size: 0.65rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: var(--radius-pill); background: var(--blue-50); color: var(--blue-600); margin-top: 0.6rem; border: 1px solid var(--blue-100); }
+
+  /* CTA */
+  .cta-section { background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 100%); padding: 5rem 2rem; text-align: center; }
+  .cta-box { max-width: 600px; margin: 0 auto; }
+  .cta-box h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--white); margin-bottom: 1rem; line-height: 1.15; }
+  .cta-box p { font-size: 1rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 2rem; font-weight: 300; }
+  .cta-btn-wrap { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .form-note { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-top: 1rem; }
+
+  /* FOOTER */
+  footer { background: var(--gray-900); border-top: 1px solid rgba(255,255,255,0.07); padding: 2.5rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-brand { font-family: var(--font-body); font-weight: 600; font-size: 1.1rem; color: var(--white); }
+  .footer-brand span { color: var(--blue-400); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: rgba(255,255,255,0.8); }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-badge   { animation: fadeUp 0.55s ease both; }
+  .hero h1      { animation: fadeUp 0.55s 0.1s ease both; }
+  .hero p       { animation: fadeUp 0.55s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.55s 0.3s ease both; }
+  .hero-trust   { animation: fadeUp 0.55s 0.4s ease both; }
+  .hero-card    { animation: fadeUp 0.55s 0.15s ease both; }
+
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .roi-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .stats-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    section { padding: 3.5rem 1.25rem; }
+    .hero { padding: 5rem 1.25rem 4rem; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Auth<span>Ally</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#roi">ROI Calculator</a></li>
+    <li><a href="demo-request.html" target="_blank" class="nav-cta">Request a Demo</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Behavioral Health Prior Authorization</div>
+      <h1>Your documentation.<br/><em>Their criteria.</em><br/>No surprises.</h1>
+      <p>AuthAlly reviews clinical notes against payer-specific ASAM and InterQual criteria before you submit — so your team catches denial risks before the payer does.</p>
+      <div class="hero-actions">
+        <a href="demo-request.html" target="_blank" class="btn-primary">Request a Demo</a>
+        <a href="#how" class="btn-ghost">See How It Works</a>
+      </div>
+      <p class="hero-trust">14 Payers &nbsp;·&nbsp; Full ASAM Continuum &nbsp;·&nbsp; MH + SUD Frameworks &nbsp;·&nbsp; PDF Upload</p>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-label">Authorization readiness — PHP / ASAM 2.5</div>
+      <span class="verdict-chip">Likely denied — 38%</span>
+      <div class="score-display">
+        <div class="score-ring">38%</div>
+        <div class="score-info">
+          <h3>Sunshine Health · PHP</h3>
+          <p>3 critical gaps in ASAM<br/>dimensional criteria</p>
+        </div>
+      </div>
+      <div class="dim-mini"><div class="dim-dot dot-r"></div><span class="dim-name">Withdrawal / monitoring need</span><span class="dim-badge badge-gap">Gap</span></div>
+      <div class="dim-mini"><div class="dim-dot dot-a"></div><span class="dim-name">Relapse risk / Dimension 5</span><span class="dim-badge badge-par">Partial</span></div>
+      <div class="dim-mini"><div class="dim-dot dot-r"></div><span class="dim-name">Recovery environment / Dim. 6</span><span class="dim-badge badge-gap">Gap</span></div>
+      <div class="dim-mini"><div class="dim-dot dot-g"></div><span class="dim-name">Biomedical conditions</span><span class="dim-badge badge-met">Met</span></div>
+      <div class="dim-mini"><div class="dim-dot dot-g"></div><span class="dim-name">Psychiatric / emotional stability</span><span class="dim-badge badge-met">Met</span></div>
+      <div class="rem-box">
+        <div class="rem-label">Remediation drafted</div>
+        <div class="rem-text">"Patient's current home environment presents significant relapse risk due to active substance use by household members and proximity to prior using locations, making IOP-level care clinically contraindicated..."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stats-bg">
+  <div class="stats-grid">
+    <div><div class="stat-number">15<span>–30%</span></div><div class="stat-label">of behavioral health prior auth requests are denied — most due to documentation gaps, not clinical appropriateness</div></div>
+    <div><div class="stat-number">$3<span>k+</span></div><div class="stat-label">average revenue lost per denied authorization before accounting for UR staff time on appeals</div></div>
+    <div><div class="stat-number">4<span>hrs</span></div><div class="stat-label">average UR staff time per prior auth submission and subsequent appeal process</div></div>
+  </div>
+</div>
+
+<section class="how-bg" id="how">
+  <div class="section-inner">
+    <p class="section-label">How AuthAlly Works</p>
+    <h2 class="section-title">From clinical note to authorization-ready in seconds.</h2>
+    <p class="section-subtitle">AuthAlly doesn't replace your clinical team — it makes their documentation payer-proof before it leaves your facility.</p>
+    <div class="steps">
+      <div class="step"><div class="step-number">01</div><h3>Upload Your Documentation</h3><p>Paste text or upload a PDF directly from Kipu, TIER, or any EHR. AuthAlly reads progress notes, H&Ps, assessments, and discharge summaries in seconds.</p></div>
+      <div class="step"><div class="step-number">02</div><h3>Select Payer and Level of Care</h3><p>Choose from 14 payers and 10 levels of care. AuthAlly applies the exact criteria framework — ASAM or InterQual — that payer uses for that specific level of care.</p></div>
+      <div class="step"><div class="step-number">03</div><h3>Review Gaps and Submit with Confidence</h3><p>AuthAlly surfaces missing criteria and drafts clinical language to address each gap. Your team adds it to the note, then submits — ready for approval.</p></div>
+    </div>
+    <p class="section-label" style="margin-top:4rem;">Supported Payers</p>
+    <h2 class="section-title" style="font-size:clamp(1.4rem,3vw,2rem);">Built for Florida's major payers — expanding nationally.</h2>
+    <div class="payer-grid">
+      <span class="payer-pill fl">Sunshine Health</span><span class="payer-pill fl">Florida Blue</span><span class="payer-pill fl">Molina Healthcare</span><span class="payer-pill fl">Humana</span><span class="payer-pill fl">Aetna</span><span class="payer-pill fl">Cigna</span><span class="payer-pill fl">United Healthcare</span><span class="payer-pill fl">Simply Healthcare</span><span class="payer-pill">BCBS</span><span class="payer-pill">WellCare</span><span class="payer-pill">Magellan</span><span class="payer-pill">Beacon Health</span><span class="payer-pill">Optum</span><span class="payer-pill">+ More</span>
+    </div>
+  </div>
+</section>
+
+<section class="features-bg" id="features">
+  <div class="section-inner">
+    <p class="section-label">Platform Features</p>
+    <h2 class="section-title">Everything you need to stop denials before they happen.</h2>
+    <p class="section-subtitle">AuthAlly brings clinical intelligence and payer-specific criteria into one platform built specifically for behavioral health and addiction treatment.</p>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">🧠</div><h3>ASAM Dimensional Screening</h3><p>Screens progress notes against all 6 ASAM dimensions for the selected level of care, identifying gaps that commonly trigger denials.</p></div>
+      <div class="feature-card"><div class="feature-icon">📋</div><h3>Payer-Specific Criteria Engine</h3><p>Each payer uses different criteria — some use ASAM, others InterQual, some hybrid. AuthAlly applies the right framework automatically.</p></div>
+      <div class="feature-card"><div class="feature-icon">✍️</div><h3>AI Remediation Drafting</h3><p>Doesn't just flag gaps — drafts the clinical language needed to address each gap. Providers add it to the note in under two minutes.</p></div>
+      <div class="feature-card"><div class="feature-icon">📄</div><h3>PDF Upload from Any EHR</h3><p>Upload directly from Kipu, TIER, or any EHR-exported PDF. No copy-paste required. AuthAlly extracts and analyzes automatically.</p></div>
+      <div class="feature-card"><div class="feature-icon">📊</div><h3>Exportable Gap Reports</h3><p>Print-ready authorization gap reports for prior auth submissions or denial appeals, including dimensional assessment and payer-specific findings.</p></div>
+      <div class="feature-card"><div class="feature-icon">🔒</div><h3>HIPAA Compliant</h3><p>Built to meet healthcare data privacy and security standards. All clinical documentation handled with enterprise-grade security.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="roi-section" id="roi">
+  <div class="roi-inner">
+    <div>
+      <div class="roi-label">Return on Investment</div>
+      <h2 class="roi-title">What does one prevented denial actually cost?</h2>
+      <p class="roi-sub">Most facilities see ROI within their first week. Adjust the sliders to estimate the revenue impact at your facility.</p>
+      <div class="roi-table">
+        <div class="roi-row"><span class="rl">Monthly auth requests</span><span class="rv" id="t-auths">40</span></div>
+        <div class="roi-row"><span class="rl">Current denial rate</span><span class="rv" id="t-rate">20%</span></div>
+        <div class="roi-row"><span class="rl">Monthly denials</span><span class="rv" id="t-denials">8</span></div>
+        <div class="roi-row"><span class="rl">Revenue at risk / month</span><span class="rv" id="t-risk">$24,000</span></div>
+        <div class="roi-row"><span class="rl">Denials prevented (est.)</span><span class="rv green" id="t-prevented">4–5</span></div>
+        <div class="roi-row"><span class="rl">Monthly revenue protected</span><span class="rv green" id="t-protected">$12,000–$15,000</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="roi-calc"><label>Monthly authorization requests</label><input type="range" id="sl-auths" min="10" max="200" value="40" step="5" oninput="calcRoi()" /><div class="slider-vals"><span>10</span><span class="slider-val-mid" id="sl-auths-val">40</span><span>200</span></div></div>
+      <div class="roi-calc"><label>Current denial rate</label><input type="range" id="sl-rate" min="5" max="40" value="20" step="1" oninput="calcRoi()" /><div class="slider-vals"><span>5%</span><span class="slider-val-mid" id="sl-rate-val">20%</span><span>40%</span></div></div>
+      <div class="roi-calc"><label>Average revenue per authorization</label><input type="range" id="sl-rev" min="1000" max="12000" value="3000" step="500" oninput="calcRoi()" /><div class="slider-vals"><span>$1k</span><span class="slider-val-mid" id="sl-rev-val">$3,000</span><span>$12k</span></div></div>
+      <div class="roi-result"><div class="rr-label">Estimated annual revenue protected</div><div class="rr-val" id="roi-annual">$108,000</div><div class="rr-sub">Based on ~50% denial reduction estimate</div></div>
+    </div>
+  </div>
+</div>
+
+<section id="testimonials">
+  <div class="section-inner">
+    <p class="section-label">Early Results</p>
+    <h2 class="section-title">Built with behavioral health UR teams, for behavioral health UR teams.</h2>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="testi-q">We were losing 3–4 PHP auths per month with Sunshine Health. AuthAlly showed us exactly why — we were never addressing Dimension 6. That one change turned our denial rate around.</div><div class="testi-person">Director of Utilization Review</div><div class="testi-role">Residential treatment center, Florida</div><span class="testi-badge">Beta User</span></div>
+      <div class="testi-card"><div class="testi-q">I didn't know Sunshine used InterQual for mental health and ASAM for SUD until AuthAlly flagged it. We had been submitting every dual-diagnosis case under ASAM. No wonder they kept getting denied.</div><div class="testi-person">UR Coordinator</div><div class="testi-role">Dual diagnosis facility, Tampa FL</div><span class="testi-badge">Beta User</span></div>
+      <div class="testi-card"><div class="testi-q">The remediation drafting is what sold me. It doesn't just tell you what's missing — it writes the clinical language for you. Our providers add it to the note in under two minutes.</div><div class="testi-person">Revenue Cycle Director</div><div class="testi-role">Multi-site behavioral health group</div><span class="testi-badge">Beta User</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section" id="demo">
+  <div class="cta-box">
+    <p class="section-label" style="color:var(--blue-200);">Get Started</p>
+    <h2>See AuthAlly analyze your documentation in 30 seconds.</h2>
+    <p>Request a personalized demo using a de-identified note from your team against your actual payer. No pitch. Just results.</p>
+    <div class="cta-btn-wrap">
+      <a href="demo-request.html" target="_blank" class="btn-primary">Request a Demo</a>
+      <a href="#how" class="btn-ghost">See How It Works</a>
+    </div>
+    <p class="form-note">No commitment required. We'll reach out within 1 business day.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Auth<span>Ally</span></div>
+  <div class="footer-links">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#roi">ROI Calculator</a>
+    <a href="mailto:sales@maklarproducts.com">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Maklár Products. All rights reserved.</div>
+</footer>
+
+<script>
+  function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+  function calcRoi() {
+    const auths = +document.getElementById('sl-auths').value;
+    const rate  = +document.getElementById('sl-rate').value / 100;
+    const rev   = +document.getElementById('sl-rev').value;
+    document.getElementById('sl-auths-val').textContent = auths;
+    document.getElementById('sl-rate-val').textContent  = Math.round(rate * 100) + '%';
+    document.getElementById('sl-rev-val').textContent   = fmt(rev);
+    const denials  = Math.round(auths * rate);
+    const riskMo   = denials * rev;
+    const prevLow  = Math.round(denials * 0.45);
+    const prevHigh = Math.round(denials * 0.6);
+    const protLow  = Math.round(prevLow  * rev * 0.8);
+    const protHigh = Math.round(prevHigh * rev * 0.8);
+    const annual   = Math.round((protLow + protHigh) / 2 * 12);
+    document.getElementById('t-auths').textContent     = auths;
+    document.getElementById('t-rate').textContent      = Math.round(rate * 100) + '%';
+    document.getElementById('t-denials').textContent   = denials;
+    document.getElementById('t-risk').textContent      = fmt(riskMo);
+    document.getElementById('t-prevented').textContent = prevLow + '–' + prevHigh;
+    document.getElementById('t-protected').textContent = fmt(protLow) + '–' + fmt(protHigh);
+    document.getElementById('roi-annual').textContent  = fmt(annual);
+  }
+  calcRoi();
+</script>
+</body>
+</html>

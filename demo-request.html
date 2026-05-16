@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Request a Demo — Maklár Products</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:      #0d1f3c;
+    --navy-mid:  #132d55;
+    --navy-lt:   #1a3a6b;
+    --blue:      #2563b0;
+    --blue-lt:   #5b9bd5;
+    --white:     #ffffff;
+    --off:       #f0f4f9;
+    --muted:     rgba(255,255,255,0.62);
+    --dim:       rgba(255,255,255,0.35);
+    --border:    rgba(255,255,255,0.14);
+    --card:      rgba(255,255,255,0.06);
+    --green:     #10b981;
+    --error:     #f87171;
+  }
+
+  html, body {
+    min-height: 100vh;
+    font-family: 'DM Sans', Helvetica, Arial, sans-serif;
+    background-color: #0d1f3c;
+    color: #ffffff;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: #ffffff;
+    padding: 0.9rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+  .nav-logo img { height: 40px; width: auto; }
+  .nav-back {
+    font-size: 0.85rem;
+    color: #132d55;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: #2563b0; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, #1a3a6b 0%, #132d55 50%, #0d1f3c 100%);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(37,99,176,0.4) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 0.3rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 em { font-style: italic; color: rgba(255,255,255,0.65); }
+  .hero p { color: rgba(255,255,255,0.6); font-size: 0.95rem; font-weight: 300; max-width: 480px; margin: 0 auto; }
+
+  /* ── MAIN LAYOUT ── */
+  .main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  /* ── PRODUCT SELECTOR ── */
+  .product-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue-lt);
+    margin-bottom: 0.75rem;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .product-btn {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 0.75rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .product-btn:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.3);
+    color: #ffffff;
+  }
+  .product-btn.selected {
+    background: rgba(37,99,176,0.25);
+    border-color: var(--blue-lt);
+    color: #ffffff;
+  }
+  .product-btn .p-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+  .product-btn .p-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: inherit;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .product-btn .p-desc { font-size: 0.7rem; color: rgba(255,255,255,0.42); line-height: 1.4; }
+  .product-btn.selected .p-desc { color: rgba(255,255,255,0.6); }
+
+  /* ── FORM ── */
+  .form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+  .form-row { margin-bottom: 1.25rem; }
+  .form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 0.4rem;
+  }
+  input, select, textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.3); }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--blue-lt);
+    background: rgba(255,255,255,0.09);
+  }
+  select option { background: #132d55; color: #ffffff; }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
+
+  .required-star { color: var(--blue-lt); margin-left: 2px; }
+
+  /* ── SUBMIT ── */
+  .submit-btn {
+    width: 100%;
+    background: var(--blue);
+    color: #ffffff;
+    border: none;
+    border-radius: 100px;
+    padding: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+    letter-spacing: 0.01em;
+  }
+  .submit-btn:hover { background: #1a52a0; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(37,99,176,0.4); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .form-note {
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.35);
+    margin-top: 0.75rem;
+  }
+
+  /* ── SUCCESS ── */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+  .success-icon {
+    width: 64px; height: 64px;
+    background: rgba(16,185,129,0.15);
+    border: 1.5px solid rgba(16,185,129,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.75rem;
+  }
+  .success-screen h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+  }
+  .success-screen p { color: rgba(255,255,255,0.6); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.7; }
+  .calendly-btn {
+    display: inline-block;
+    background: #ffffff;
+    color: var(--navy);
+    padding: 0.9rem 2.5rem;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .calendly-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.25); }
+
+  /* ── ERROR ── */
+  .error-msg {
+    color: var(--error);
+    font-size: 0.75rem;
+    margin-top: 0.35rem;
+    display: none;
+  }
+  input.invalid, select.invalid, textarea.invalid { border-color: var(--error); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0a1828;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    text-align: center;
+    padding: 1.25rem;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.3);
+  }
+  footer strong { color: var(--blue-lt); }
+
+  @media (max-width: 480px) {
+    .product-grid { grid-template-columns: 1fr; }
+    .form-row-2 { grid-template-columns: 1fr; }
+    .form-card { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://maklarproducts.com" class="nav-logo">
+    <img src="Maklar_Logo.png" alt="Maklár Products" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <span style="display:none;font-weight:700;font-size:1.2rem;color:#132d55;">Maklár <span style="color:#2563b0;">Products</span></span>
+  </a>
+  <a href="javascript:history.back()" class="nav-back">← Back</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Schedule a Demo</div>
+  <h1>See our products<br/><em>in action.</em></h1>
+  <p>Tell us a little about your organization and we'll tailor your demo to what matters most to you.</p>
+</div>
+
+<!-- MAIN FORM -->
+<div class="main">
+
+  <!-- PRODUCT SELECTOR -->
+  <div class="product-label">Which product are you interested in? <span class="required-star">*</span></div>
+  <div class="product-grid">
+    <div class="product-btn" onclick="selectProduct('Creddi', this)">
+      <div class="p-icon">🏥</div>
+      <span class="p-name">Creddi</span>
+      <span class="p-desc">Provider credentialing management</span>
+    </div>
+    <div class="product-btn" onclick="selectProduct('AuthAlly', this)">
+      <div class="p-icon">✅</div>
+      <span class="p-name">AuthAlly</span>
+      <span class="p-desc">Prior authorization screening</span>
+    </div>
+    <div class="product-btn" onclick="selectProduct('TrendDX', this)">
+      <div class="p-icon">📊</div>
+      <span class="p-name">TrendDX</span>
+      <span class="p-desc">RCM KPI dashboard</span>
+    </div>
+  </div>
+  <div class="error-msg" id="product-error">Please select a product.</div>
+
+  <!-- FORM CARD -->
+  <div class="form-card" id="form-section">
+    <div class="form-row-2">
+      <div class="form-row" style="margin-bottom:0;">
+        <label>First Name <span class="required-star">*</span></label>
+        <input type="text" id="firstName" placeholder="Jane"/>
+        <div class="error-msg" id="firstName-error">Required</div>
+      </div>
+      <div class="form-row" style="margin-bottom:0;">
+        <label>Last Name <span class="required-star">*</span></label>
+        <input type="text" id="lastName" placeholder="Smith"/>
+        <div class="error-msg" id="lastName-error">Required</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label>Work Email <span class="required-star">*</span></label>
+      <input type="email" id="email" placeholder="jane@yourorganization.com"/>
+      <div class="error-msg" id="email-error">Please enter a valid email address</div>
+    </div>
+
+    <div class="form-row">
+      <label>Phone Number</label>
+      <input type="tel" id="phone" placeholder="(555) 000-0000"/>
+    </div>
+
+    <div class="form-row">
+      <label>Organization Name <span class="required-star">*</span></label>
+      <input type="text" id="org" placeholder="Your organization name"/>
+      <div class="error-msg" id="org-error">Required</div>
+    </div>
+
+    <div class="form-row">
+      <label>Organization Type <span class="required-star">*</span></label>
+      <select id="orgType">
+        <option value="" disabled selected>Select your organization type</option>
+        <option>Private Practice</option>
+        <option>Clinic / Outpatient Facility</option>
+        <option>Hospital / Health System</option>
+        <option>Behavioral Health Facility</option>
+        <option>Addiction Treatment Center</option>
+        <option>Credentialing Company</option>
+        <option>Billing Company</option>
+        <option>Other</option>
+      </select>
+      <div class="error-msg" id="orgType-error">Please select an organization type</div>
+    </div>
+
+    <div class="form-row">
+      <label>Number of Providers</label>
+      <select id="providerCount">
+        <option value="" disabled selected>Select a range</option>
+        <option>1–5 providers</option>
+        <option>6–15 providers</option>
+        <option>16–50 providers</option>
+        <option>51–150 providers</option>
+        <option>150+ providers</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label>Anything specific you'd like to see in the demo?</label>
+      <textarea id="notes" placeholder="Tell us about your current challenges or what you'd like to focus on..."></textarea>
+    </div>
+
+    <button class="submit-btn" onclick="submitForm()">Request Your Demo →</button>
+    <p class="form-note">No commitment required. You'll be redirected to schedule your demo time after submitting.</p>
+  </div>
+
+  <!-- SUCCESS SCREEN -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">✓</div>
+    <h2>Request received!</h2>
+    <p>Thank you — your demo request has been sent to our team at <strong style="color:#5b9bd5;">sales@maklarproducts.com</strong>.<br/>Now pick a time that works for you and we'll see you on the call.</p>
+    <a href="https://calendly.com/maklarproducts-sales/30min" target="_blank" class="calendly-btn">Schedule Your Demo Time →</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Maklár Products</strong> &nbsp;·&nbsp; maklarproducts.com &nbsp;·&nbsp; sales@maklarproducts.com &nbsp;·&nbsp; © 2026 Maklár Products. All rights reserved.
+</footer>
+
+<script>
+  let selectedProduct = '';
+
+  function selectProduct(name, el) {
+    selectedProduct = name;
+    document.querySelectorAll('.product-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('product-error').style.display = 'none';
+  }
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function setError(fieldId, show) {
+    const field = document.getElementById(fieldId);
+    const error = document.getElementById(fieldId + '-error');
+    if (show) {
+      field.classList.add('invalid');
+      if (error) error.style.display = 'block';
+    } else {
+      field.classList.remove('invalid');
+      if (error) error.style.display = 'none';
+    }
+  }
+
+  function submitForm() {
+    let valid = true;
+
+    // Product check
+    if (!selectedProduct) {
+      document.getElementById('product-error').style.display = 'block';
+      valid = false;
+    }
+
+    // Field validation
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName  = document.getElementById('lastName').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const org       = document.getElementById('org').value.trim();
+    const orgType   = document.getElementById('orgType').value;
+
+    setError('firstName', !firstName);
+    setError('lastName',  !lastName);
+    setError('email',     !validateEmail(email));
+    setError('org',       !org);
+    setError('orgType',   !orgType);
+
+    if (!firstName || !lastName || !validateEmail(email) || !org || !orgType) valid = false;
+
+    if (!valid) return;
+
+    // Build mailto
+    const phone         = document.getElementById('phone').value.trim();
+    const providerCount = document.getElementById('providerCount').value;
+    const notes         = document.getElementById('notes').value.trim();
+
+    const subject = encodeURIComponent(`Demo Request — ${selectedProduct} — ${org}`);
+    const body = encodeURIComponent(
+`New Demo Request — Maklár Products
+
+Product Interest: ${selectedProduct}
+
+Name: ${firstName} ${lastName}
+Email: ${email}
+Phone: ${phone || 'Not provided'}
+Organization: ${org}
+Organization Type: ${orgType}
+Number of Providers: ${providerCount || 'Not specified'}
+
+Notes / Topics to Cover:
+${notes || 'None provided'}
+
+---
+Submitted via maklarproducts.com demo request form`
+    );
+
+    // Open mailto
+    window.location.href = `mailto:sales@maklarproducts.com?subject=${subject}&body=${body}`;
+
+    // Show success screen after short delay
+    setTimeout(() => {
+      document.getElementById('form-section').style.display = 'none';
+      document.querySelector('.product-grid').style.display = 'none';
+      document.querySelector('.product-label').style.display = 'none';
+      document.getElementById('product-error').style.display = 'none';
+      document.getElementById('success-screen').style.display = 'block';
+    }, 800);
+  }
+</script>
+
+</body>
+</html>

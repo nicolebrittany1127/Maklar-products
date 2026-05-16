@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Creddi — Credentialing Management, Simplified</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue-50: #E6F1FB;
+    --blue-100: #B5D4F4;
+    --blue-200: #85B7EB;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --blue-900: #042C53;
+    --white: #ffffff;
+    --gray-50: #F7F9FC;
+    --gray-100: #EEF2F7;
+    --gray-200: #D8E2EE;
+    --gray-400: #8A9AB5;
+    --gray-700: #3D4F6B;
+    --gray-900: #0F1C2E;
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-pill: 999px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--gray-900);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: var(--blue-800);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    color: var(--blue-400);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--gray-700);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--blue-600); }
+
+  .nav-cta {
+    background: var(--blue-600);
+    color: var(--white) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-pill);
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--blue-800) !important; color: var(--white) !important; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, var(--blue-900) 0%, var(--blue-800) 50%, var(--blue-600) 100%);
+    color: var(--white);
+    padding: 7rem 2rem 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(55,138,221,0.35) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--blue-100);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: var(--radius-pill);
+    margin-bottom: 1.75rem;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    max-width: 780px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--blue-200);
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--white);
+    color: var(--blue-800);
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius-pill);
+    font-weight: 400;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: background 0.2s;
+  }
+
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+  /* SOCIAL PROOF STRIP */
+  .trust-strip {
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 1.25rem 2rem;
+    text-align: center;
+  }
+
+  .trust-strip p {
+    font-size: 0.82rem;
+    color: var(--gray-400);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .trust-logos {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .trust-logo-item {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray-200);
+    letter-spacing: 0.05em;
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+
+  .section-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue-400);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--gray-700);
+    max-width: 560px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* FEATURES */
+  .features-bg { background: var(--white); }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .feature-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .feature-card:hover {
+    border-color: var(--blue-200);
+    transform: translateY(-3px);
+  }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--blue-50);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .feature-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--blue-600);
+    fill: none;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .feature-card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-card p {
+    font-size: 0.92rem;
+    color: var(--gray-700);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* HOW IT WORKS */
+  .how-bg { background: var(--gray-50); border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 3.5rem;
+    position: relative;
+  }
+
+  .step {
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+
+  .step-number {
+    width: 52px;
+    height: 52px;
+    background: var(--blue-600);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 auto 1.25rem;
+  }
+
+  .step h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+  }
+
+  .step p {
+    font-size: 0.875rem;
+    color: var(--gray-700);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* WHO IT'S FOR */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 3rem;
+  }
+
+  .audience-card {
+    border: 1px solid var(--gray-200);
+    border-left: 4px solid var(--blue-400);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 1.5rem;
+    background: var(--white);
+  }
+
+  .audience-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--blue-800);
+    margin-bottom: 0.4rem;
+  }
+
+  .audience-card p {
+    font-size: 0.875rem;
+    color: var(--gray-700);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* STATS */
+  .stats-bg {
+    background: var(--blue-900);
+    color: var(--white);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .stat-item {}
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--blue-200);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--blue-50);
+    border-top: 1px solid var(--blue-100);
+    text-align: center;
+  }
+
+  .cta-box {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .cta-box h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    color: var(--blue-900);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .cta-box p {
+    font-size: 1.05rem;
+    color: var(--gray-700);
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .demo-form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 420px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .demo-form input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.85rem 1.25rem;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--gray-900);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .demo-form input:focus { border-color: var(--blue-400); }
+
+  .demo-form button {
+    background: var(--blue-600);
+    color: var(--white);
+    padding: 0.85rem 1.75rem;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .demo-form button:hover { background: var(--blue-800); }
+
+  .form-note {
+    font-size: 0.78rem;
+    color: var(--gray-400);
+    margin-top: 0.75rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--gray-900);
+    color: rgba(255,255,255,0.5);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  footer strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  footer a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    margin: 0 0.75rem;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--white); }
+
+  .footer-links { margin-top: 0.75rem; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge  { animation: fadeUp 0.5s ease both; }
+  .hero h1     { animation: fadeUp 0.5s 0.1s ease both; }
+  .hero p      { animation: fadeUp 0.5s 0.2s ease both; }
+  .hero-actions{ animation: fadeUp 0.5s 0.3s ease both; }
+
+  /* HERO MOCKUP */
+  .hero { padding: 7rem 2rem 0; }
+
+  .hero-mockup {
+    max-width: 820px;
+    margin: 3rem auto 0;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-bottom: none;
+    border-radius: 14px 14px 0 0;
+    padding: 1rem 1rem 0;
+    position: relative;
+  }
+
+  .mockup-bar {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 0.85rem;
+  }
+
+  .mockup-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+  }
+
+  .mockup-title-bar {
+    font-size: 0.72rem; color: rgba(255,255,255,0.35);
+    margin-left: 0.5rem; font-weight: 400;
+  }
+
+  .mockup-screen {
+    background: var(--gray-50);
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+  }
+
+  .mockup-topbar {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0.6rem 1rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .mockup-topbar-left {
+    font-size: 0.72rem; font-weight: 600;
+    color: var(--blue-800); letter-spacing: 0.02em;
+  }
+
+  .mockup-topbar-right {
+    display: flex; gap: 0.5rem;
+  }
+
+  .mockup-pill {
+    font-size: 0.65rem; padding: 0.2rem 0.6rem;
+    border-radius: 999px; font-weight: 500;
+  }
+
+  .mockup-pill-blue { background: var(--blue-50); color: var(--blue-600); }
+  .mockup-pill-green { background: #E8F5EE; color: #1A6B48; }
+  .mockup-pill-orange { background: #FEF3C7; color: #92400E; }
+
+  .mockup-body { padding: 0.75rem; }
+
+  .mockup-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem; margin-bottom: 0.75rem;
+  }
+
+  .mockup-stat {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px; padding: 0.6rem 0.75rem;
+  }
+
+  .mockup-stat-label {
+    font-size: 0.6rem; color: var(--gray-400);
+    font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 0.2rem;
+  }
+
+  .mockup-stat-value {
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--blue-800); line-height: 1;
+  }
+
+  .mockup-stat-sub {
+    font-size: 0.6rem; margin-top: 0.15rem;
+    font-weight: 500;
+  }
+
+  .mockup-stat-sub.green { color: #1A6B48; }
+  .mockup-stat-sub.orange { color: #92400E; }
+
+  .mockup-table {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px; overflow: hidden;
+  }
+
+  .mockup-table-header {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1fr 1fr 1fr 0.8fr;
+    gap: 0; padding: 0.5rem 0.75rem;
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .mockup-table-header span {
+    font-size: 0.6rem; font-weight: 600;
+    color: var(--gray-400); text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .mockup-table-row {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1fr 1fr 1fr 0.8fr;
+    gap: 0; padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--gray-100);
+    align-items: center;
+  }
+
+  .mockup-table-row:last-child { border-bottom: none; }
+  .mockup-table-row:nth-child(even) { background: var(--gray-50); }
+
+  .mockup-table-row span {
+    font-size: 0.65rem; color: var(--gray-700); font-weight: 400;
+  }
+
+  .mockup-table-row .provider-name {
+    font-weight: 600; color: var(--gray-900);
+  }
+
+  .mockup-badge {
+    display: inline-block; font-size: 0.58rem;
+    padding: 0.15rem 0.45rem; border-radius: 999px;
+    font-weight: 600;
+  }
+
+  .badge-active { background: #E8F5EE; color: #1A6B48; }
+  .badge-pending { background: #FEF3C7; color: #92400E; }
+  .badge-expiring { background: #FEE2E2; color: #B91C1C; }
+  .badge-enrolled { background: var(--blue-50); color: var(--blue-600); }
+
+  /* DASHBOARD SECTION */
+  .dashboard-section {
+    background: var(--gray-50);
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 5rem 2rem;
+  }
+
+  .dashboard-inner {
+    max-width: 1080px; margin: 0 auto;
+  }
+
+  .dashboard-full-mockup {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(4,44,83,0.08);
+    margin-top: 2.5rem;
+  }
+
+  .dash-topbar {
+    background: var(--blue-900);
+    padding: 0.75rem 1.25rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .dash-topbar-logo {
+    font-size: 0.85rem; font-weight: 700;
+    color: var(--white); letter-spacing: -0.01em;
+  }
+
+  .dash-topbar-logo span { color: var(--blue-400); }
+
+  .dash-topbar-nav {
+    display: flex; gap: 1.5rem;
+  }
+
+  .dash-topbar-nav a {
+    font-size: 0.72rem; color: rgba(255,255,255,0.55);
+    text-decoration: none; font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  .dash-topbar-nav a.active { color: var(--white); font-weight: 500; }
+
+  .dash-body {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    min-height: 480px;
+  }
+
+  .dash-sidebar {
+    background: var(--gray-50);
+    border-right: 1px solid var(--gray-200);
+    padding: 1rem 0;
+  }
+
+  .dash-sidebar-section {
+    padding: 0.5rem 1rem;
+    font-size: 0.6rem; font-weight: 600;
+    color: var(--gray-400); text-transform: uppercase;
+    letter-spacing: 0.08em; margin-top: 0.5rem;
+  }
+
+  .dash-sidebar-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1rem; font-size: 0.72rem;
+    color: var(--gray-700); cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .dash-sidebar-item.active {
+    background: var(--blue-50);
+    color: var(--blue-700);
+    border-right: 2px solid var(--blue-600);
+    font-weight: 500;
+  }
+
+  .dash-sidebar-item svg {
+    width: 14px; height: 14px;
+    stroke: currentColor; fill: none;
+    stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  .dash-sidebar-badge {
+    margin-left: auto; font-size: 0.58rem;
+    background: var(--blue-600); color: var(--white);
+    padding: 0.1rem 0.4rem; border-radius: 999px; font-weight: 600;
+  }
+
+  .dash-sidebar-badge.red { background: #B91C1C; }
+
+  .dash-main {
+    padding: 1.25rem;
+    overflow: hidden;
+  }
+
+  .dash-main-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .dash-main-title {
+    font-size: 0.9rem; font-weight: 600; color: var(--gray-900);
+  }
+
+  .dash-main-sub {
+    font-size: 0.7rem; color: var(--gray-400); margin-top: 0.1rem;
+  }
+
+  .dash-actions {
+    display: flex; gap: 0.5rem;
+  }
+
+  .dash-btn {
+    font-size: 0.65rem; padding: 0.3rem 0.75rem;
+    border-radius: 999px; font-weight: 500; cursor: pointer;
+    border: 1px solid var(--gray-200); background: var(--white);
+    color: var(--gray-700);
+  }
+
+  .dash-btn-primary {
+    background: var(--blue-600); color: var(--white);
+    border-color: var(--blue-600);
+  }
+
+  .dash-kpis {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem; margin-bottom: 1rem;
+  }
+
+  .dash-kpi {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px; padding: 0.75rem;
+  }
+
+  .dash-kpi-label {
+    font-size: 0.6rem; color: var(--gray-400);
+    font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 0.3rem;
+  }
+
+  .dash-kpi-value {
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--gray-900); line-height: 1;
+  }
+
+  .dash-kpi-delta {
+    font-size: 0.6rem; font-weight: 500; margin-top: 0.2rem;
+  }
+
+  .dash-kpi-delta.green { color: #1A6B48; }
+  .dash-kpi-delta.red { color: #B91C1C; }
+  .dash-kpi-delta.orange { color: #92400E; }
+
+  .dash-content-grid {
+    display: grid; grid-template-columns: 1fr 260px;
+    gap: 0.75rem;
+  }
+
+  .dash-panel {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px; overflow: hidden;
+  }
+
+  .dash-panel-header {
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--gray-200);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .dash-panel-title {
+    font-size: 0.72rem; font-weight: 600; color: var(--gray-900);
+  }
+
+  .dash-panel-link {
+    font-size: 0.62rem; color: var(--blue-600); cursor: pointer;
+  }
+
+  .dash-provider-row {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 0.9fr 0.9fr 0.7fr;
+    padding: 0.5rem 0.85rem;
+    border-bottom: 1px solid var(--gray-100);
+    align-items: center;
+  }
+
+  .dash-provider-row.header {
+    background: var(--gray-50);
+    padding: 0.35rem 0.85rem;
+  }
+
+  .dash-provider-row.header span {
+    font-size: 0.58rem; font-weight: 600;
+    color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  .dash-provider-row span { font-size: 0.65rem; color: var(--gray-700); }
+  .dash-provider-row .pname { font-weight: 600; color: var(--gray-900); }
+  .dash-provider-row .pspec { font-size: 0.58rem; color: var(--gray-400); }
+
+  .dash-alert-item {
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--gray-100);
+    display: flex; gap: 0.5rem; align-items: flex-start;
+  }
+
+  .dash-alert-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 3px;
+  }
+
+  .dash-alert-dot.red { background: #EF4444; }
+  .dash-alert-dot.orange { background: #F59E0B; }
+  .dash-alert-dot.blue { background: var(--blue-400); }
+
+  .dash-alert-text { font-size: 0.65rem; color: var(--gray-700); line-height: 1.5; }
+  .dash-alert-name { font-weight: 600; color: var(--gray-900); }
+  .dash-alert-time { font-size: 0.58rem; color: var(--gray-400); margin-top: 0.1rem; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    .hero { padding: 5rem 1.25rem 0; }
+    section { padding: 3.5rem 1.25rem; }
+    .mockup-stats { grid-template-columns: repeat(2,1fr); }
+    .mockup-table-header, .mockup-table-row { grid-template-columns: 2fr 1fr 1fr; }
+    .mockup-table-header span:nth-child(n+4),
+    .mockup-table-row span:nth-child(n+4) { display: none; }
+    .dash-body { grid-template-columns: 1fr; }
+    .dash-sidebar { display: none; }
+    .dash-kpis { grid-template-columns: repeat(2,1fr); }
+    .dash-content-grid { grid-template-columns: 1fr; }
+    .dashboard-section { padding: 3.5rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Credd<span>i</span></a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#who">Who it's for</a></li>
+    <li><a href="https://calendly.com/maklarproducts-sales/30min" target="_blank" class="nav-cta">Request a Demo</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Credentialing Management Platform</div>
+  <h1>Provider credentialing,<br /><em>finally under control.</em></h1>
+  <p>Creddi centralizes provider licensing, credentials, payer network status, and recredentialing timelines — all in one intelligent platform.</p>
+  <div class="hero-actions">
+    <a href="https://calendly.com/maklarproducts-sales/30min" target="_blank" class="btn-primary">Request a Demo</a>
+    <a href="#dashboard" class="btn-ghost">See the Dashboard</a>
+  </div>
+
+  <!-- HERO MINI MOCKUP -->
+  <div class="hero-mockup">
+    <div class="mockup-bar">
+      <div class="mockup-dot"></div>
+      <div class="mockup-dot"></div>
+      <div class="mockup-dot"></div>
+      <span class="mockup-title-bar">Creddi — Provider Roster Dashboard</span>
+    </div>
+    <div class="mockup-screen">
+      <div class="mockup-topbar">
+        <span class="mockup-topbar-left">Creddi &nbsp;/&nbsp; Provider Roster</span>
+        <div class="mockup-topbar-right">
+          <span class="mockup-pill mockup-pill-green">42 Active</span>
+          <span class="mockup-pill mockup-pill-orange">3 Expiring</span>
+          <span class="mockup-pill mockup-pill-blue">12 Payers</span>
+        </div>
+      </div>
+      <div class="mockup-body">
+        <div class="mockup-stats">
+          <div class="mockup-stat">
+            <div class="mockup-stat-label">Total Providers</div>
+            <div class="mockup-stat-value">47</div>
+            <div class="mockup-stat-sub green">↑ 3 this month</div>
+          </div>
+          <div class="mockup-stat">
+            <div class="mockup-stat-label">Fully Credentialed</div>
+            <div class="mockup-stat-value">42</div>
+            <div class="mockup-stat-sub green">89% compliant</div>
+          </div>
+          <div class="mockup-stat">
+            <div class="mockup-stat-label">Expiring Soon</div>
+            <div class="mockup-stat-value">3</div>
+            <div class="mockup-stat-sub orange">Within 60 days</div>
+          </div>
+          <div class="mockup-stat">
+            <div class="mockup-stat-label">Payer Enrollments</div>
+            <div class="mockup-stat-value">184</div>
+            <div class="mockup-stat-sub green">All networks active</div>
+          </div>
+        </div>
+        <div class="mockup-table">
+          <div class="mockup-table-header">
+            <span>Provider</span>
+            <span>Specialty</span>
+            <span>License Exp.</span>
+            <span>Cred Status</span>
+            <span>Payer Network</span>
+            <span>Alert</span>
+          </div>
+          <div class="mockup-table-row">
+            <span class="provider-name">Dr. A. Johnson, MD</span>
+            <span>Internal Medicine</span>
+            <span>12/2026</span>
+            <span><span class="mockup-badge badge-active">Active</span></span>
+            <span><span class="mockup-badge badge-enrolled">Enrolled</span></span>
+            <span>—</span>
+          </div>
+          <div class="mockup-table-row">
+            <span class="provider-name">Dr. M. Rivera, DO</span>
+            <span>Family Practice</span>
+            <span>03/2025</span>
+            <span><span class="mockup-badge badge-expiring">Expiring</span></span>
+            <span><span class="mockup-badge badge-enrolled">Enrolled</span></span>
+            <span>🔔 60d</span>
+          </div>
+          <div class="mockup-table-row">
+            <span class="provider-name">Dr. S. Patel, MD</span>
+            <span>Psychiatry</span>
+            <span>08/2026</span>
+            <span><span class="mockup-badge badge-active">Active</span></span>
+            <span><span class="mockup-badge badge-pending">Pending</span></span>
+            <span>—</span>
+          </div>
+          <div class="mockup-table-row">
+            <span class="provider-name">Dr. L. Chen, NP</span>
+            <span>Behavioral Health</span>
+            <span>11/2026</span>
+            <span><span class="mockup-badge badge-active">Active</span></span>
+            <span><span class="mockup-badge badge-enrolled">Enrolled</span></span>
+            <span>—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <p>Built for healthcare credentialing professionals</p>
+  <div class="trust-logos">
+    <span class="trust-logo-item">Credentialing Companies</span>
+    <span class="trust-logo-item">·</span>
+    <span class="trust-logo-item">Hospitals</span>
+    <span class="trust-logo-item">·</span>
+    <span class="trust-logo-item">Clinics & Facilities</span>
+    <span class="trust-logo-item">·</span>
+    <span class="trust-logo-item">HR Departments</span>
+  </div>
+</div>
+
+<!-- FULL DASHBOARD MOCKUP -->
+<section class="dashboard-section" id="dashboard">
+  <div class="dashboard-inner">
+    <p class="section-label">See It In Action</p>
+    <h2 class="section-title">Your entire credentialing operation, at a glance.</h2>
+    <p class="section-subtitle">Creddi's intuitive dashboard gives your team full visibility into provider status, upcoming deadlines, and payer enrollments — all in real time.</p>
+
+    <div class="dashboard-full-mockup">
+      <!-- TOP BAR -->
+      <div class="dash-topbar">
+        <div class="dash-topbar-logo">Credd<span>i</span></div>
+        <div class="dash-topbar-nav">
+          <a href="#" class="active">Dashboard</a>
+          <a href="#">Providers</a>
+          <a href="#">Payers</a>
+          <a href="#">Timelines</a>
+          <a href="#">Reports</a>
+          <a href="#">Alerts</a>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="dash-body">
+
+        <!-- SIDEBAR -->
+        <div class="dash-sidebar">
+          <div class="dash-sidebar-section">Navigation</div>
+          <div class="dash-sidebar-item active">
+            <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Dashboard
+          </div>
+          <div class="dash-sidebar-item">
+            <svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Provider Roster
+            <span class="dash-sidebar-badge">47</span>
+          </div>
+          <div class="dash-sidebar-item">
+            <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            Licenses & Certs
+          </div>
+          <div class="dash-sidebar-item">
+            <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            Payer Networks
+          </div>
+          <div class="dash-sidebar-item">
+            <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Timelines
+            <span class="dash-sidebar-badge red">3</span>
+          </div>
+          <div class="dash-sidebar-section">Reports</div>
+          <div class="dash-sidebar-item">
+            <svg viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            Compliance Report
+          </div>
+          <div class="dash-sidebar-item">
+            <svg viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            Alerts & Reminders
+          </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="dash-main">
+          <div class="dash-main-header">
+            <div>
+              <div class="dash-main-title">Provider Dashboard</div>
+              <div class="dash-main-sub">Last updated: Today at 9:14 AM · 47 active providers</div>
+            </div>
+            <div class="dash-actions">
+              <button class="dash-btn">Export Report</button>
+              <button class="dash-btn">+ Add Provider</button>
+              <button class="dash-btn dash-btn-primary">Request Demo</button>
+            </div>
+          </div>
+
+          <!-- KPI ROW -->
+          <div class="dash-kpis">
+            <div class="dash-kpi">
+              <div class="dash-kpi-label">Total Providers</div>
+              <div class="dash-kpi-value">47</div>
+              <div class="dash-kpi-delta green">↑ 3 added this month</div>
+            </div>
+            <div class="dash-kpi">
+              <div class="dash-kpi-label">Fully Credentialed</div>
+              <div class="dash-kpi-value">42</div>
+              <div class="dash-kpi-delta green">89% compliance rate</div>
+            </div>
+            <div class="dash-kpi">
+              <div class="dash-kpi-label">Expiring ≤ 60 Days</div>
+              <div class="dash-kpi-value">3</div>
+              <div class="dash-kpi-delta red">Action required</div>
+            </div>
+            <div class="dash-kpi">
+              <div class="dash-kpi-label">Active Payer Enrollments</div>
+              <div class="dash-kpi-value">184</div>
+              <div class="dash-kpi-delta green">Across 12 payers</div>
+            </div>
+          </div>
+
+          <!-- CONTENT GRID -->
+          <div class="dash-content-grid">
+
+            <!-- PROVIDER TABLE -->
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <div class="dash-panel-title">Provider Roster</div>
+                <span class="dash-panel-link">View all →</span>
+              </div>
+              <div class="dash-provider-row header">
+                <span>Provider</span>
+                <span>Specialty</span>
+                <span>License Exp.</span>
+                <span>Cred Status</span>
+                <span>Network</span>
+              </div>
+              <div class="dash-provider-row">
+                <div><div class="pname">Dr. A. Johnson, MD</div><div class="pspec">Internal Medicine</div></div>
+                <span>Internal Medicine</span>
+                <span>Dec 2026</span>
+                <span><span class="mockup-badge badge-active">Active</span></span>
+                <span><span class="mockup-badge badge-enrolled">Enrolled</span></span>
+              </div>
+              <div class="dash-provider-row">
+                <div><div class="pname">Dr. M. Rivera, DO</div><div class="pspec">Family Practice</div></div>
+                <span>Family Practice</span>
+                <span style="color:#B91C1C;font-weight:600;">Mar 2025 ⚠</span>
+                <span><span class="mockup-badge badge-expiring">Expiring</span></span>
+                <span><span class="mockup-badge badge-enrolled">Enrolled</span></span>
+              </div>
+              <div class="dash-provider-row">
+                <div><div class="pname">Dr. S. Patel, MD</div><div class="pspec">Psychiatry</div></div>
+                <span>Psychiatry</span>
+                <span>Aug 2026</span>
+                <span><span class="mockup-badge badge-active">Active</span></span>
+                <span><span class="mockup-badge badge-pending">Pending</span></span>
+              </div>
+              <div class="dash-provider-row">
+                <div><div class="pname">Dr. L. Chen, NP</div><div class="pspec">Behavioral Health</div></div>
+                <span>Behavioral Health</span>
+                <span>Nov 2026</span>
+                <span><span class="mockup-badge badge-active">Active</span></span>
+                <span><span class="mockup-badge badge-enrolled">Enrolled</span></span>
+              </div>
+              <div class="dash-provider-row">
+                <div><div class="pname">Dr. T. Williams, MD</div><div class="pspec">Cardiology</div></div>
+                <span>Cardiology</span>
+                <span>Jun 2026</span>
+                <span><span class="mockup-badge badge-active">Active</span></span>
+                <span><span class="mockup-badge badge-enrolled">Enrolled</span></span>
+              </div>
+            </div>
+
+            <!-- ALERTS PANEL -->
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <div class="dash-panel-title">Active Alerts</div>
+                <span class="dash-panel-link">Manage →</span>
+              </div>
+              <div class="dash-alert-item">
+                <div class="dash-alert-dot red"></div>
+                <div>
+                  <div class="dash-alert-text"><span class="dash-alert-name">Dr. M. Rivera</span> — FL Medical License expiring in 47 days</div>
+                  <div class="dash-alert-time">Renewal deadline: Mar 15, 2025</div>
+                </div>
+              </div>
+              <div class="dash-alert-item">
+                <div class="dash-alert-dot orange"></div>
+                <div>
+                  <div class="dash-alert-text"><span class="dash-alert-name">Dr. K. Thompson</span> — DEA Registration renewal due in 58 days</div>
+                  <div class="dash-alert-time">Renewal deadline: Mar 26, 2025</div>
+                </div>
+              </div>
+              <div class="dash-alert-item">
+                <div class="dash-alert-dot orange"></div>
+                <div>
+                  <div class="dash-alert-text"><span class="dash-alert-name">Dr. S. Patel</span> — Sunshine Health enrollment pending 22 days</div>
+                  <div class="dash-alert-time">Follow up recommended</div>
+                </div>
+              </div>
+              <div class="dash-alert-item">
+                <div class="dash-alert-dot blue"></div>
+                <div>
+                  <div class="dash-alert-text"><span class="dash-alert-name">Dr. J. Garcia</span> — Recredentialing window opens in 90 days</div>
+                  <div class="dash-alert-time">BCBS Florida — due May 2025</div>
+                </div>
+              </div>
+              <div class="dash-alert-item">
+                <div class="dash-alert-dot blue"></div>
+                <div>
+                  <div class="dash-alert-text"><span class="dash-alert-name">3 providers</span> — Malpractice certificates up for renewal Q2</div>
+                  <div class="dash-alert-time">April – June 2025</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-bg" id="features">
+  <div class="section-inner">
+    <p class="section-label">Platform Features</p>
+    <h2 class="section-title">Everything you need to stay credentialed and compliant.</h2>
+    <p class="section-subtitle">Creddi brings structure and clarity to a process that's historically been scattered across spreadsheets and email threads.</p>
+
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <h3>Centralized Provider Profiles</h3>
+        <p>House all provider licenses, certifications, DEA registrations, malpractice history, and credentials in a single, organized profile — always audit-ready.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3>Recredentialing Timeline Tracking</h3>
+        <p>Never miss a deadline. Creddi automatically tracks credentialing and recredentialing cycles, surfacing upcoming expirations weeks in advance.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <h3>Payer Network Status Management</h3>
+        <p>Track enrollment and participation status across all contracted payers. Know exactly where every provider stands in the network — in real time.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3>Provider Roster Management</h3>
+        <p>Manage your entire roster with ease. Add, update, and organize providers across multiple locations, specialties, and payer relationships.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+        </div>
+        <h3>Automated Deadline Alerts</h3>
+        <p>Get notified before licenses lapse or credentialing windows close. Configurable alerts keep your team proactive rather than reactive.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <h3>Reporting & Compliance Dashboards</h3>
+        <p>Generate instant status reports for internal reviews, audits, or payer submissions. Get a clear picture of your credentialing health at a glance.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-bg" id="how">
+  <div class="section-inner">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">Up and running in four simple steps.</h2>
+    <p class="section-subtitle">Creddi is designed to be intuitive for credentialing professionals from day one.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Import Your Roster</h3>
+        <p>Upload your provider roster directly into Creddi — from a spreadsheet or manual entry. We organize everything automatically.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Build Provider Profiles</h3>
+        <p>Attach licenses, certifications, DEA numbers, malpractice coverage, and payer enrollment data to each provider.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Set Your Timelines</h3>
+        <p>Define credentialing and recredentialing cycles. Creddi calculates upcoming deadlines and sends automated alerts.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Monitor & Report</h3>
+        <p>Use your dashboard to track compliance in real time and generate reports whenever you need them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section id="who">
+  <div class="section-inner">
+    <p class="section-label">Who It's For</p>
+    <h2 class="section-title">Built for every credentialing team.</h2>
+    <p class="section-subtitle">Whether you're managing 10 providers or 10,000, Creddi scales with your operation.</p>
+
+    <div class="audience-grid">
+      <div class="audience-card">
+        <h3>Credentialing Companies</h3>
+        <p>Manage multiple client organizations and their provider rosters from a single centralized platform. Scale without adding overhead.</p>
+      </div>
+      <div class="audience-card">
+        <h3>Hospital Systems</h3>
+        <p>Keep pace with the complexity of large medical staffs, multi-specialty departments, and hundreds of payer relationships.</p>
+      </div>
+      <div class="audience-card">
+        <h3>Clinics & Outpatient Facilities</h3>
+        <p>Eliminate the spreadsheet chaos. Creddi gives small and mid-size practices the tools enterprise teams rely on.</p>
+      </div>
+      <div class="audience-card">
+        <h3>HR & Compliance Departments</h3>
+        <p>Ensure every provider in your organization remains fully credentialed and compliant — without manually tracking every deadline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-bg">
+  <div class="section-inner" style="text-align:center;">
+    <p class="section-label" style="color:var(--blue-200);">The Creddi Difference</p>
+    <h2 class="section-title" style="color:var(--white);">Credentialing done right, from day one.</h2>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">of licenses and credentials in one place</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0</div>
+        <div class="stat-label">missed recredentialing deadlines</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">All</div>
+        <div class="stat-label">contracted payer statuses tracked</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">real-time compliance visibility</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / DEMO -->
+<section class="cta-section" id="demo">
+  <div class="cta-box">
+    <p class="section-label">Get Started</p>
+    <h2>Ready to simplify your credentialing workflow?</h2>
+    <p>Join credentialing teams who use Creddi to stay organized, compliant, and ahead of every deadline. Request a personalized demo today.</p>
+
+    <div class="demo-form" style="justify-content:center;">
+      <a href="https://calendly.com/maklarproducts-sales/30min" target="_blank" style="display:inline-block;background:var(--blue-600);color:white;padding:0.85rem 2.5rem;border-radius:999px;font-weight:600;font-size:1rem;text-decoration:none;">Schedule Your Demo →</a>
+    </div>
+    <p class="form-note">No commitment required. Pick a time that works for you.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Creddi</strong> — Credentialing Management, Simplified.</p>
+  <p style="margin-top:0.35rem;">© 2025 Creddi. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
