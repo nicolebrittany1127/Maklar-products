@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Intake Auth Tracker — An AuthAlly Extension | Maklar Products</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue-50:  #E6F1FB;
+    --blue-100: #B5D4F4;
+    --blue-200: #85B7EB;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --blue-900: #042C53;
+    --white:    #ffffff;
+    --gray-50:  #F7F9FC;
+    --gray-100: #EEF2F7;
+    --gray-200: #D8E2EE;
+    --gray-400: #8A9AB5;
+    --gray-700: #3D4F6B;
+    --gray-900: #0F1C2E;
+    --amber:    #B45309;
+    --amber-bg: #FEF3C7;
+    --red:      #B91C1C;
+    --red-bg:   #FEE2E2;
+    --green:    #0D4A32;
+    --green-bg: #D1FAE5;
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body:    'DM Sans', sans-serif;
+    --radius:     12px;
+    --radius-sm:  8px;
+    --radius-pill: 999px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--gray-900);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: var(--font-body);
+    font-weight: 700; font-size: 1.5rem;
+    color: var(--blue-900); text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--blue-400); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+
+  .nav-links a {
+    text-decoration: none; font-size: 0.875rem;
+    font-weight: 400; color: var(--gray-700);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--blue-600); }
+
+  .nav-cta {
+    background: var(--blue-600); color: var(--white) !important;
+    padding: 0.5rem 1.25rem; border-radius: var(--radius-pill);
+    font-weight: 500 !important; font-size: 0.875rem !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--blue-800) !important; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, var(--blue-900) 0%, var(--blue-800) 50%, var(--blue-600) 100%);
+    color: var(--white);
+    padding: 6rem 2rem 5rem;
+    position: relative; overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 15% 20%, rgba(55,138,221,0.35) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.1fr 0.9fr;
+    gap: 3.5rem; align-items: center;
+    position: relative; z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--blue-100); font-size: 0.75rem;
+    font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.35rem 1rem; border-radius: var(--radius-pill);
+    margin-bottom: 1.75rem;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 5vw, 3.8rem);
+    font-weight: 400; line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--blue-200); }
+
+  .hero p {
+    font-size: 1.05rem; color: rgba(255,255,255,0.72);
+    max-width: 460px; margin-bottom: 2.25rem;
+    font-weight: 300; line-height: 1.75;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+
+  .btn-primary {
+    background: var(--white); color: var(--blue-800);
+    padding: 0.9rem 2.25rem; border-radius: var(--radius-pill);
+    font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+  .btn-ghost {
+    background: transparent; color: var(--white);
+    padding: 0.9rem 2.25rem; border-radius: var(--radius-pill);
+    font-weight: 400; font-size: 0.95rem; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3); transition: background 0.2s;
+  }
+
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+  .hero-tags {
+    font-size: 0.75rem; color: rgba(255,255,255,0.55);
+    letter-spacing: 0.03em; font-weight: 500;
+  }
+
+  /* HERO CARD MOCKUP */
+  .hero-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+    color: var(--gray-900);
+  }
+
+  .hero-card-label {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gray-400);
+    margin-bottom: 1rem;
+  }
+
+  .hero-card-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem; margin-bottom: 1.25rem;
+  }
+
+  .hero-card-stat {
+    background: var(--gray-50); border-radius: var(--radius-sm);
+    padding: 0.65rem 0.5rem; text-align: center;
+  }
+
+  .hero-card-stat .n {
+    font-family: var(--font-display); font-size: 1.5rem;
+    color: var(--blue-800); line-height: 1;
+  }
+
+  .hero-card-stat .l {
+    font-size: 0.62rem; color: var(--gray-400);
+    font-weight: 500; margin-top: 0.2rem; text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-card-section-label {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--gray-400);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-card-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.65rem 0; border-top: 1px solid var(--gray-100);
+  }
+
+  .hero-card-row:first-of-type { border-top: none; }
+
+  .hero-card-row .name { font-size: 0.85rem; font-weight: 500; color: var(--gray-900); }
+  .hero-card-row .meta { font-size: 0.72rem; color: var(--gray-400); margin-top: 0.1rem; }
+
+  .badge-pill {
+    font-size: 0.68rem; font-weight: 600; padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-pill); white-space: nowrap;
+  }
+
+  .badge-red   { background: var(--red-bg);   color: var(--red); }
+  .badge-amber { background: var(--amber-bg); color: var(--amber); }
+
+  /* TRUST STRIP */
+  .trust-strip {
+    background: var(--gray-50); border-bottom: 1px solid var(--gray-200);
+    padding: 1.25rem 2rem; text-align: center;
+  }
+
+  .trust-strip p {
+    font-size: 0.78rem; color: var(--gray-400);
+    font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  /* SHARED SECTION STYLES */
+  .section { padding: 6rem 2rem; background: var(--white); }
+  .section-inner { max-width: 1080px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--blue-400); margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 400; line-height: 1.18;
+    color: var(--gray-900); margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem; color: var(--gray-700);
+    max-width: 560px; line-height: 1.7; font-weight: 300;
+    margin-bottom: 3.5rem;
+  }
+
+  /* FEATURE GRID (reuses product-card visual language) */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+  }
+
+  .feature-card {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 2rem;
+    background: var(--white);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue-400), var(--blue-600));
+    opacity: 0; transition: opacity 0.2s;
+  }
+
+  .feature-card:hover {
+    border-color: var(--blue-200);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(4,44,83,0.1);
+  }
+
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    width: 40px; height: 40px; border-radius: var(--radius-sm);
+    background: var(--blue-50); color: var(--blue-600);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .feature-card h3 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: 1.4rem; color: var(--blue-900);
+    margin-bottom: 0.6rem;
+  }
+
+  .feature-card p {
+    font-size: 0.9rem; color: var(--gray-700);
+    line-height: 1.7; font-weight: 300;
+  }
+
+  /* HOW IT WORKS */
+  .steps {
+    background: var(--gray-50);
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 6rem 2rem;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .step {
+    display: flex; gap: 1rem;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--blue-600); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 1.1rem;
+  }
+
+  .step h4 {
+    font-size: 1rem; font-weight: 600; color: var(--gray-900);
+    margin-bottom: 0.4rem;
+  }
+
+  .step p {
+    font-size: 0.88rem; color: var(--gray-700);
+    line-height: 1.65; font-weight: 300;
+  }
+
+  /* STATS (mirrors mission-stats) */
+  .stats-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+
+  .stats-text h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400; line-height: 1.2;
+    color: var(--gray-900); margin-bottom: 1.25rem;
+  }
+
+  .stats-text p {
+    font-size: 1rem; color: var(--gray-700);
+    line-height: 1.8; font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-box {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    padding: 1.5rem;
+  }
+
+  .stat-box .num {
+    font-family: var(--font-display);
+    font-size: 2.2rem; font-weight: 400;
+    color: var(--blue-600); line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-box .label {
+    font-size: 0.82rem; color: var(--gray-400);
+    font-weight: 500; line-height: 1.4;
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--blue-900);
+    padding: 6rem 2rem; text-align: center;
+  }
+
+  .cta-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 400; color: var(--white);
+    margin-bottom: 1rem; line-height: 1.2;
+  }
+
+  .cta-section p {
+    font-size: 1.05rem; color: rgba(255,255,255,0.65);
+    max-width: 520px; margin: 0 auto 2.5rem;
+    font-weight: 300; line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--gray-900);
+    color: rgba(255,255,255,0.5);
+    padding: 3rem 2rem; text-align: center;
+    font-size: 0.85rem;
+  }
+
+  footer strong { color: var(--white); font-weight: 600; }
+
+  footer a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    margin: 0 0.75rem; transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--white); }
+
+  .footer-links { margin-top: 0.75rem; }
+
+  .footer-products {
+    display: flex; gap: 1.5rem; justify-content: center;
+    margin-top: 1.25rem; flex-wrap: wrap;
+  }
+
+  .footer-products a {
+    font-size: 0.8rem; font-weight: 500;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-products a:hover { color: var(--white); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge   { animation: fadeUp 0.5s ease both; }
+  .hero h1      { animation: fadeUp 0.5s 0.1s ease both; }
+  .hero p       { animation: fadeUp 0.5s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.5s 0.3s ease both; }
+  .hero-card    { animation: fadeUp 0.6s 0.2s ease both; }
+
+  @media (max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: 1fr; gap: 3rem; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    nav { padding: 0 1rem; }
+    .hero { padding: 4.5rem 1.25rem 3.5rem; }
+    .section { padding: 4rem 1.25rem; }
+    .steps { padding: 4rem 1.25rem; }
+    .cta-section { padding: 4rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">Maklar <span>Products</span></a>
+  <ul class="nav-links">
+    <li><a href="/#products">Products</a></li>
+    <li><a href="authally_landing.html">AuthAlly</a></li>
+    <li><a href="mailto:sales@maklarproducts.com" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">AuthAlly Extension · Intake &amp; Authorization Tracking</div>
+      <h1>Every intake.<br /><em>One system.</em><br />Nothing falls through.</h1>
+      <p>Intake Auth Tracker replaces spreadsheets and email chains with one structured intake link and a real-time authorization pipeline — built to work alongside AuthAlly's clinical documentation review.</p>
+      <div class="hero-actions">
+        <a href="mailto:sales@maklarproducts.com" class="btn-primary">Request a Demo</a>
+        <a href="#how-it-works" class="btn-ghost">See How It Works</a>
+      </div>
+      <p class="hero-tags">ONE INTAKE LINK &nbsp;·&nbsp; REAL-TIME STATUS PIPELINE &nbsp;·&nbsp; AUTOMATED EXPIRATION ALERTS &nbsp;·&nbsp; SECURE DOCUMENT STORAGE</p>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-label">Authorization Pipeline — Live</div>
+      <div class="hero-card-stats">
+        <div class="hero-card-stat"><div class="n">4</div><div class="l">New</div></div>
+        <div class="hero-card-stat"><div class="n">7</div><div class="l">Pending</div></div>
+        <div class="hero-card-stat"><div class="n">21</div><div class="l">Approved</div></div>
+        <div class="hero-card-stat"><div class="n">2</div><div class="l">Denied</div></div>
+      </div>
+      <div class="hero-card-section-label">Expiring Soon</div>
+      <div class="hero-card-row">
+        <div>
+          <div class="name">J. Alvarez</div>
+          <div class="meta">Harborview Recovery · Carelon</div>
+        </div>
+        <span class="badge-pill badge-red">3d left</span>
+      </div>
+      <div class="hero-card-row">
+        <div>
+          <div class="name">M. Chen</div>
+          <div class="meta">Cedar Point · Aetna</div>
+        </div>
+        <span class="badge-pill badge-amber">11d left</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <p>Built for billing companies &nbsp;·&nbsp; behavioral health facilities &nbsp;·&nbsp; utilization review teams &nbsp;·&nbsp; multi-site providers</p>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-inner">
+    <p class="section-label">What It Does</p>
+    <h2 class="section-title">Everything your team needs to<br />manage authorizations end-to-end</h2>
+    <p class="section-subtitle">From the moment a facility submits an admission to the moment an authorization is approved — one system, fully visible.</p>
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">1</div>
+        <h3>Structured Intake</h3>
+        <p>One link, every facility. Admissions and authorization requests land in a structured queue instead of scattered across inboxes.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">2</div>
+        <h3>Real-Time Status Pipeline</h3>
+        <p>Track every authorization through New → Pending → Approved → Denied, with a biller assigned to each case and full visibility across facilities.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">3</div>
+        <h3>Automated Expiration Alerts</h3>
+        <p>Get flagged before an authorization lapses — not after, when a gap in coverage has already cost revenue.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">4</div>
+        <h3>Secure Document Management</h3>
+        <p>Attestations, clinical documentation, and supporting files uploaded once at intake — viewable anytime by your team.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="steps" id="how-it-works">
+  <div class="section-inner">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">Three steps, no spreadsheets</h2>
+
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Facility submits</h4>
+          <p>One structured intake link — no login required for the facility, no more emailing every admission one at a time.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Biller works the queue</h4>
+          <p>Your team self-assigns cases, contacts the payer, and logs the outcome — all in one dashboard, organized by facility.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Dashboard tracks the rest</h4>
+          <p>Status updates automatically, expiration alerts fire before a lapse, and every authorization stays visible from intake to close.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section">
+  <div class="stats-inner">
+    <div class="stats-text">
+      <p class="section-label">Built as an AuthAlly Extension</p>
+      <h2>Intake tracking and clinical review, working together.</h2>
+      <p>AuthAlly reviews the documentation. Intake Auth Tracker manages the pipeline it moves through — one intake link, one dashboard, one place to see every authorization from admission to approval.</p>
+      <p>Built for billing companies and facilities managing authorizations across multiple sites, where a spreadsheet stops being enough.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="num">1 Link</div>
+        <div class="label">Replaces spreadsheets & email intake entirely</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">Automated</div>
+        <div class="label">Expiration alerts before authorizations lapse</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">100%</div>
+        <div class="label">Visibility into every authorization's status</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">Built for</div>
+        <div class="label">AuthAlly customers who need tracking, not just review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div style="max-width:640px;margin:0 auto;">
+    <p class="section-label" style="color:var(--blue-200)">Get Started</p>
+    <h2>Ready to stop tracking authorizations by hand?</h2>
+    <p>Pair this with AuthAlly's clinical documentation review for a complete prior authorization workflow — from intake to approval.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="mailto:sales@maklarproducts.com" class="btn-primary">Request a Demo</a>
+      <a href="authally_landing.html" class="btn-ghost">Explore AuthAlly</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Maklar Products</strong> — Healthcare Technology Solutions</p>
+  <p style="margin-top:0.35rem;">© 2025 Maklar Products. All rights reserved.</p>
+  <div class="footer-products">
+    <a href="creddi-landing.html">Creddi</a>
+    <a href="trenddx-landing.html">TrendDX</a>
+    <a href="authally_landing.html">AuthAlly</a>
+    <a href="intake-auth-tracker-landing.html">Intake Auth Tracker</a>
+  </div>
+  <div class="footer-links">
+    <a href="mailto:sales@maklarproducts.com">Contact</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+  </div>
+</footer>
+
+</body>
+</html>
