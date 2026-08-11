@@ -104,7 +104,9 @@
   .step p { font-size: 0.875rem; color: var(--gray-700); line-height: 1.7; }
 
   /* PAYERS */
-  .payer-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.75rem; }
+  .payer-group-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin: 1.5rem 0 0.6rem; }
+  .payer-group-label:first-of-type { margin-top: 1.75rem; }
+  .payer-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .payer-pill { font-size: 0.8rem; padding: 0.35rem 0.9rem; border-radius: var(--radius-pill); border: 1px solid var(--gray-200); background: var(--white); color: var(--gray-700); font-weight: 500; }
   .payer-pill.fl { border-color: var(--blue-100); background: var(--blue-50); color: var(--blue-600); }
 
@@ -213,7 +215,7 @@
         <a href="demo-request.html" target="_blank" class="btn-primary">Request a Demo</a>
         <a href="#how" class="btn-ghost">See How It Works</a>
       </div>
-      <p class="hero-trust">14 Payers &nbsp;·&nbsp; Full ASAM Continuum &nbsp;·&nbsp; MH + SUD Frameworks &nbsp;·&nbsp; PDF Upload</p>
+      <p class="hero-trust">29 Payers &nbsp;·&nbsp; FL, MD &amp; VA &nbsp;·&nbsp; Full ASAM Continuum &nbsp;·&nbsp; MH + SUD Frameworks</p>
     </div>
     <div class="hero-card">
       <div class="hero-card-label">Authorization readiness — PHP / ASAM 2.5</div>
@@ -253,13 +255,25 @@
     <p class="section-subtitle">AuthAlly doesn't replace your clinical team — it makes their documentation payer-proof before it leaves your facility.</p>
     <div class="steps">
       <div class="step"><div class="step-number">01</div><h3>Upload Your Documentation</h3><p>Paste text or upload a PDF directly from Kipu, TIER, or any EHR. AuthAlly reads progress notes, H&Ps, assessments, and discharge summaries in seconds.</p></div>
-      <div class="step"><div class="step-number">02</div><h3>Select Payer and Level of Care</h3><p>Choose from 14 payers and 10 levels of care. AuthAlly applies the exact criteria framework — ASAM or InterQual — that payer uses for that specific level of care.</p></div>
+      <div class="step"><div class="step-number">02</div><h3>Select Payer and Level of Care</h3><p>Choose from 29 payers across Florida, Maryland &amp; Virginia and 10 levels of care. AuthAlly applies the exact criteria framework — ASAM or InterQual — that payer uses for that specific level of care.</p></div>
       <div class="step"><div class="step-number">03</div><h3>Review Gaps and Submit with Confidence</h3><p>AuthAlly surfaces missing criteria and drafts clinical language to address each gap. Your team adds it to the note, then submits — ready for approval.</p></div>
     </div>
     <p class="section-label" style="margin-top:4rem;">Supported Payers</p>
-    <h2 class="section-title" style="font-size:clamp(1.4rem,3vw,2rem);">Built for Florida's major payers — expanding nationally.</h2>
+    <h2 class="section-title" style="font-size:clamp(1.4rem,3vw,2rem);">Built for Florida, Maryland &amp; Virginia's major payers.</h2>
+
+    <p class="payer-group-label">Florida</p>
     <div class="payer-grid">
-      <span class="payer-pill fl">Sunshine Health</span><span class="payer-pill fl">Florida Blue</span><span class="payer-pill fl">Molina Healthcare</span><span class="payer-pill fl">Humana</span><span class="payer-pill fl">Aetna</span><span class="payer-pill fl">Cigna</span><span class="payer-pill fl">United Healthcare</span><span class="payer-pill fl">Simply Healthcare</span><span class="payer-pill">BCBS</span><span class="payer-pill">WellCare</span><span class="payer-pill">Magellan</span><span class="payer-pill">Beacon Health</span><span class="payer-pill">Optum</span><span class="payer-pill">+ More</span>
+      <span class="payer-pill fl">Sunshine Health</span><span class="payer-pill fl">Florida Blue</span><span class="payer-pill fl">Molina Healthcare</span><span class="payer-pill fl">Humana</span><span class="payer-pill fl">Aetna</span><span class="payer-pill fl">Cigna</span><span class="payer-pill fl">United Healthcare</span><span class="payer-pill fl">Simply Healthcare</span><span class="payer-pill">BCBS</span><span class="payer-pill">WellCare</span><span class="payer-pill">Magellan</span><span class="payer-pill">Beacon Health</span><span class="payer-pill">Optum</span><span class="payer-pill">TRICARE</span>
+    </div>
+
+    <p class="payer-group-label">Maryland</p>
+    <div class="payer-grid">
+      <span class="payer-pill fl">Aetna Better Health of Maryland</span><span class="payer-pill fl">CareFirst Community Health Plan</span><span class="payer-pill fl">Priority Partners</span><span class="payer-pill fl">UnitedHealthcare Community Plan</span><span class="payer-pill">Wellpoint Maryland</span><span class="payer-pill">MedStar Family Choice</span><span class="payer-pill">Maryland Physicians Care</span><span class="payer-pill">Jai Medical Systems</span>
+    </div>
+
+    <p class="payer-group-label">Virginia</p>
+    <div class="payer-grid">
+      <span class="payer-pill fl">Aetna Better Health of Virginia</span><span class="payer-pill fl">Anthem HealthKeepers Plus</span><span class="payer-pill fl">Sentara Health Plans</span><span class="payer-pill">Humana Healthy Horizons</span><span class="payer-pill">UnitedHealthcare Community Plan</span><span class="payer-pill">+ More</span>
     </div>
   </div>
 </section>
