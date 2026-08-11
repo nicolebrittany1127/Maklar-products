@@ -141,6 +141,16 @@
   .rr-val { font-family: var(--font-display); font-size: 2.5rem; color: var(--blue-200); }
   .rr-sub { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 0.25rem; }
 
+  /* CROSS-PROMO */
+  .promo-section { background: var(--gray-50); border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); padding: 4rem 2rem; }
+  .promo-box { max-width: 1100px; margin: 0 auto; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .promo-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-600); background: var(--blue-50); padding: 0.3rem 0.75rem; border-radius: var(--radius-pill); margin-bottom: 0.9rem; }
+  .promo-box h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; color: var(--blue-900); margin-bottom: 0.5rem; }
+  .promo-box p { font-size: 0.9rem; color: var(--gray-700); font-weight: 300; max-width: 480px; }
+  .promo-cta { flex-shrink: 0; }
+  .btn-blue { background: var(--blue-600); color: var(--white); padding: 0.85rem 2rem; border-radius: var(--radius-pill); font-weight: 600; font-size: 0.9rem; text-decoration: none; display: inline-block; transition: background 0.2s; }
+  .btn-blue:hover { background: var(--blue-800); }
+
   /* TESTIMONIALS */
   .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
   .testi-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 1.75rem; }
@@ -318,6 +328,19 @@
   </div>
 </div>
 
+<section class="promo-section">
+  <div class="promo-box">
+    <div>
+      <span class="promo-tag">Also From Maklar</span>
+      <h3>Pair AuthAlly with Intake Auth Tracker</h3>
+      <p>One structured intake link and a real-time authorization pipeline — built as an extension of AuthAlly so documentation review and authorization tracking work together, from admission to approval.</p>
+    </div>
+    <div class="promo-cta">
+      <a href="intake-auth-tracker-landing.html" class="btn-blue">Explore Intake Auth Tracker →</a>
+    </div>
+  </div>
+</section>
+
 <section id="testimonials">
   <div class="section-inner">
     <p class="section-label">Early Results</p>
@@ -349,6 +372,7 @@
     <a href="#how">How it works</a>
     <a href="#features">Features</a>
     <a href="#roi">ROI Calculator</a>
+    <a href="intake-auth-tracker-landing.html">Intake Auth Tracker</a>
     <a href="mailto:sales@maklarproducts.com">Contact</a>
   </div>
   <div class="footer-copy">© 2026 Maklár Products. All rights reserved.</div>
